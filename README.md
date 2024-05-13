@@ -4,6 +4,8 @@ SnipSavvy is a code snippet management platform, coded by developers for develop
 
 Website Link: https://snipsavvy.vercel.app/
 
+![image](https://github.com/SnipSavvy/SnipSavvy_Frontend/assets/169388490/e3be5a71-2ed7-4543-b12e-97e144336797)
+
 ![image](https://github.com/sahilrohera10/SnipSavvy_Prod_Frontend/assets/90958499/f3ae0e5d-e3c8-4770-bb72-31612fe857d8)
 
 ![image](https://github.com/sahilrohera10/SnipSavvy_Prod_Frontend/assets/90958499/4671bb1e-b725-4224-b68e-c0c0b5fa8251)
@@ -20,6 +22,11 @@ Website Link: https://snipsavvy.vercel.app/
 * We have a global search feature for users to easily navigate among their code snippets via the tags they set with the code snippet
 
 * Sharing is multi level, a user can share a whole workspace, a collection or a single snippet which can be restricted by the user.
+  
+![image](https://github.com/SnipSavvy/SnipSavvy_Frontend/assets/169388490/bad6ce8e-f7ca-41bc-9bf9-c1675196df44)
+![image](https://github.com/SnipSavvy/SnipSavvy_Frontend/assets/169388490/66184825-d1db-4caf-8957-7e3aa0b84ecf)
+
+
 
 ## ✨Upcoming Features
 
@@ -28,6 +35,9 @@ Website Link: https://snipsavvy.vercel.app/
 * Community Support and Knowledge sahring page built in the spirit of Learn in public
 
 * Implementing History Tracking feature for code snippets, upto the last edition
+  
+![image](https://github.com/SnipSavvy/SnipSavvy_Frontend/assets/169388490/9a415e7f-321a-4c5e-85a6-ea041e0c63a6)
+
 
 ## Frontend Tech Stack 🚀
 
@@ -94,6 +104,7 @@ git push origin <branch-name>
 
 We greatly appreciate your contributions and look forward to reviewing your pull request.
 
+![image](https://github.com/SnipSavvy/SnipSavvy_Frontend/assets/169388490/c9fa4d44-a709-4fac-85e0-07c5fcad6626)
 
 ## ⭐Pull Request Template
 
