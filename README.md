@@ -4,6 +4,11 @@ SnipSavvy is a code snippet management platform, coded by developers for develop
 
 Website Link: https://snipsavvy.vercel.app/
 
+![image](https://github.com/sahilrohera10/SnipSavvy_Prod_Frontend/assets/90958499/f3ae0e5d-e3c8-4770-bb72-31612fe857d8)
+
+![image](https://github.com/sahilrohera10/SnipSavvy_Prod_Frontend/assets/90958499/4671bb1e-b725-4224-b68e-c0c0b5fa8251)
+
+
 ## ⭐Features 
 
 * The Platform serves as a repository for storing, categorizing and sharing their code snippets 
