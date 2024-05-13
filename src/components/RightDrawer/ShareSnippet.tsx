@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { LuSendHorizonal } from "react-icons/lu";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { LuCopyPlus } from "react-icons/lu";
 import { MdCancel } from "react-icons/md";
@@ -77,7 +77,6 @@ const ShareSnippet = ({ onClose, snippet_id }: ModalProps) => {
             <LuSendHorizonal />
           </button>
         </form>
-        <ToastContainer />
         <div className="border border-gray-500"></div>
         <div className="flex justify-center items-center flex-col">
           <h1 className="text-white text-xl font-semibold py-2">

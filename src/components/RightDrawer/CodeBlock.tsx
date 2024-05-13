@@ -3,7 +3,7 @@ import React, { useState, useEffect, Suspense } from "react";
 import "prismjs";
 import "prismjs/themes/prism-twilight.css";
 import { LuCopyPlus } from "react-icons/lu";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "prismjs/components/prism-python";
 import "prismjs/components/prism-java";
@@ -75,17 +75,26 @@ function CodeBlock({ isEditable, setIsEditable, shared, setIsOpen }: props) {
     if (codeElement) {
       codeElement.contentEditable = isEditable ? "false" : "true";
     }
+    const edit = searchParams.get("edit") ? searchParams.get("edit") : ""
+    if(!edit){
+      const nextSearchParams = new URLSearchParams(searchParams.toString());
+      nextSearchParams.append("edit", "true")
+      router.push(`${pathname}?${nextSearchParams.toString()}`)
+    }
+    if(edit){
+      const nextSearchParams = new URLSearchParams(searchParams.toString());
+      nextSearchParams.delete("edit")
+      router.push(`${pathname}?${nextSearchParams.toString()}`)
+    }
   };
 
   const copyToClipboard = (code: string) => {
     navigator.clipboard
       .writeText(code)
       .then(() => {
-        // Code successfully copied to clipboard
         toast.success("Code copied to clipboard");
       })
       .catch((error) => {
-        // Unable to copy to clipboard
         console.error("Unable to copy code to clipboard", error);
       });
   };
@@ -172,7 +181,7 @@ function CodeBlock({ isEditable, setIsEditable, shared, setIsOpen }: props) {
     }
   };
   
-  const languages = ["Python", "JavaScript", "Java", "TypeScript", "C++"];
+  const languages = ["Python", "JavaScript", "Java", "TypeScript", "C++", "React", "Node"];
   const [selectedLanguage, setSelectedLanguage] = useState<any>();
 
   const handleClick = () => {};
@@ -182,7 +191,7 @@ function CodeBlock({ isEditable, setIsEditable, shared, setIsOpen }: props) {
   
   return (
     <Suspense fallback={<div>Loading...</div>}>
-    <div className="outline-none overflow-auto" contentEditable={isEditable}>
+    <div className="outline-none overflow-auto">
       <div className=''>
         <h2 className="text-3xl text-white p-2 font-bold overflow-y-auto">
           {snippet && flag === true ? (
@@ -283,7 +292,6 @@ function CodeBlock({ isEditable, setIsEditable, shared, setIsOpen }: props) {
                   >
                     <LuCopyPlus />
                   </button>
-                  <ToastContainer />
                   <button
                     className="absolute -top-10 right-16 text-zinc-100 font-bold bg-zinc-900 hover:bg-zinc-700 border border-zinc-100 duration-300 rounded-sm p-2"
                     onClick={toggleBox}
@@ -294,7 +302,7 @@ function CodeBlock({ isEditable, setIsEditable, shared, setIsOpen }: props) {
               )}
 
             {showBox && snippet && <ShareSnippet snippet_id = {snippet} onClose={() => setShowBox(false)} />}
-            <div className="min-h-[50vh] min-w-[40vw] w-[47vw] fixed py-2 rounded-b-md border-zinc-900 bg-zinc-900">
+            <div className="min-h-[50vh] min-w-[40vw] w-[47vw] h-[42vh] overflow-y-auto fixed py-2 rounded-b-md border-zinc-900 bg-zinc-900">
               {snippet ? (
                 <pre className="p-4 outline-none">
                   <code
@@ -330,7 +338,6 @@ function CodeBlock({ isEditable, setIsEditable, shared, setIsOpen }: props) {
                   >
                     Save
                   </button>
-                  <ToastContainer />
                 </div>
               )}
             </div>
