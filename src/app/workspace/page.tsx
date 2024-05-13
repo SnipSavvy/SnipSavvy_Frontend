@@ -253,6 +253,7 @@ const WorkspacePage: React.FC = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
