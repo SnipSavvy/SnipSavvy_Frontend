@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+::-webkit-scrollbar {
+  width: 8px; /* Set the width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #000; /* Set the background color of the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #333; /* Set the color of the scrollbar thumb */
+  border-radius: 10px; /* Set the border radius to make it rounded */
+}
+.content h1 {
+  position: relative;
+  font-size: 5rem;
+  font-weight: 800;
+  color: #dddbdb;
+  text-shadow: 0px 0px 3px #006BCB, 0px 0px 10px #006BCB;
+  margin: 3px;
+ }
+.content h1::before {
+  content: "";
+  position: absolute;
+  top: 65%;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #006BCB;
+  transform: perspective(10px) rotateX(10deg) scale(1, 0.2);
+  filter: blur(1em);
+  opacity: 0.5;
+ }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  overflow-x: hidden;
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.glow-gradient {
+  background-color: white;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.glow-gradient:hover {
+  background: linear-gradient(45deg, #822cce, #4e51ce);
+  background-size: 400% 400%;
+  animation: glow 3s ease;
+}
+
+@keyframes glow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.grid-pattern {
+  background: 
+      linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1.5px, transparent 1px),
+      linear-gradient(rgba(255, 255, 255, 0.1) 1.5px, transparent 1px);
+    background-size: 50px 50px;
+  position:relative;
+}
+
+@keyframes glow {
+  0% {
+    filter: brightness(1);
+    background-position: 0 0;
+  }
+  100% {
+    filter: brightness(1.5); /* Adjust the brightness value for the desired glow effect */
+    background-position: 100% 0;
+  }
+}
+
+.grid-pattern:hover {
+  animation: glow 7s forwards;
+}
+
+.plus-icon {
+  position: absolute;
+  top: 0px; 
+  left: 0px; 
+  width: 20px;
+  height: 20px; 
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
