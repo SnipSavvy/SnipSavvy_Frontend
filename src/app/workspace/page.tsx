@@ -17,6 +17,7 @@ import { baseURL } from "@/config";
 import { IoIosArrowForward } from "react-icons/io";
 import { RiRefreshLine } from "react-icons/ri";
 import SearchParamsHandler from "./SearchParamHandler";
+import {ToastContainer} from 'react-toastify';
 
 const style = {
   position: "absolute" as "absolute",
@@ -252,6 +253,7 @@ const WorkspacePage: React.FC = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
