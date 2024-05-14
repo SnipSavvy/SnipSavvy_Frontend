@@ -3,8 +3,11 @@ import { useState, useEffect, Suspense } from "react";
 import axios from "axios";
 import { baseURL } from "@/config";
 import { IoIosArrowForward } from "react-icons/io";
-
-const SearchParamsHandler = () => {
+import { SearchIcon } from "lucide-react";
+interface SearchParam {
+  closeGlobalSearch: () => void
+}
+const SearchParamsHandler = ({closeGlobalSearch}: SearchParam) => {
   const [inpText, setInpText] = useState("");
   const [searchData, setSearchData] = useState([]);
 
@@ -34,17 +37,24 @@ const SearchParamsHandler = () => {
     const newUrl = `${currentUrl.origin}${currentUrl.pathname}?${searchParams.toString()}`;
 
     window.history.replaceState({}, "", newUrl);
+    closeGlobalSearch()
   };
 
   return (
-    <div>
-      <input
-        value={inpText}
-        onChange={(e) => setInpText(e.target.value)}
-        type="text"
-        className="w-full h-10 vh-5 bg-gray-800 text-white px-4 border-2 border-gray-400 hover:shadow-outline focus:outline-none border-l-0 rounded-r mb-4"
-        placeholder="Enter text..."
-      />
+    <div >
+      <div className="flex items-center relative">
+        <div className="border-2 ml-6 px-2 border-gray-400 h-10 flex items-center rounded-l">
+          <SearchIcon />
+        </div>
+        <input
+          value={inpText}
+          onChange={(e) => setInpText(e.target.value)}
+          type="text"
+          className="w-full h-10 mt-4 bg-gray-800 text-white px-4 border-2 border-gray-400 hover:shadow-outline focus:outline-none border-l-0 rounded-r mb-4 font-mono"
+          placeholder="Find by Tag, Description, title..."
+        />
+      </div>
+
       {inpText && (
         <div className="w-[95%] m-auto mt-4 max-h-[40vh] overflow-auto">
           {searchData &&
