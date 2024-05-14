@@ -15,6 +15,7 @@ interface EditCollectionProps {
     name: string;
     description: string;
   };
+  fetchCategories: () => void;
 }
 
 const modalStyle = {
@@ -23,10 +24,8 @@ const modalStyle = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: "", // Change background color to white
-   // Add border radius for a rounded look
-
-  boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)", // Add box shadow for depth
+  bgcolor: "", 
+  boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)", 
   p: 4,
 };
 
@@ -35,6 +34,7 @@ const EditCollection: React.FC<EditCollectionProps> = ({
   onClose,
   workspace,
   collection,
+  fetchCategories,
 }) => {
   const [newName, setNewName] = useState<string>("");
   const [newDescription, setNewDescription] = useState<string>("");
@@ -64,7 +64,8 @@ const EditCollection: React.FC<EditCollectionProps> = ({
         (response) => {
           console.log(response);
           alert("Collection Updated");
-          window.location.reload();
+          fetchCategories();
+          
         },
         (error) => {
           console.log(error);
