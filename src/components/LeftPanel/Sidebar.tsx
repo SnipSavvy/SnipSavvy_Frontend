@@ -260,7 +260,11 @@ const Sidebar = () => {
           alt="logo"
           className="mt-6 pb-4 opacity-80"
         />
+
+        {/* Main Workspace */}
+
         <div className="flex-col flex-wrap justify-center">
+          <div className="flex-col flex-wrap justify-center overflow-y-auto " style={{maxHeight:"300px"}}>
           {!isDataLoading ? (
             workspace?.map((workspace: Workspace, i: number) => {
               return (
@@ -320,7 +324,12 @@ const Sidebar = () => {
               />
             </div>
           )}
+          </div>
           <hr className="opacity-40 w-[70%] m-auto" />
+
+          {/* Shared Workspace */}
+          
+          <div className="flex-col flex-wrap justify-center overflow-y-auto " style={{maxHeight:"160px"}}  >
           {!isDataLoading ? (
             sharedWorkspace?.map((workspace: any, i: number) => {
               return (
@@ -362,6 +371,7 @@ const Sidebar = () => {
               />
             </div>
           )}
+          </div>
         </div>
         <div className="">
           <Modal fetchWorkspace={fetchWorkspace} />

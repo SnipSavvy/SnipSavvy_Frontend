@@ -53,7 +53,7 @@ const DeleteSnippet: React.FC<DeleteSnippetProps> = ({ open, onClose, snippet_id
         } catch (error) {
             console.error("Error deleting user:", error);
         } finally {
-            // Close the modal regardless of the outcome
+            
             onClose();
         }
     }
