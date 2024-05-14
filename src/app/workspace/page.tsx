@@ -101,6 +101,7 @@ const WorkspacePage: React.FC = () => {
   const toggleRefresh = () => {
     setIsRefresh(!isRefresh)
   }
+  const shared = searchParams.get("shared") ? searchParams.get("shared") : ""
 
   return (
     <div>
@@ -214,18 +215,18 @@ const WorkspacePage: React.FC = () => {
                 <span>CTRL+K</span>
               </div>
               <div className="w-2/12 vh-6 flex justify-between pl-6 items-center">
-                <button
-                  className="bg-blue-600 hover:bg-blue-400 duration-300 rounded-xl text-xl px-3 py-2 mb-2 text-white"
+                {shared != "true" ? <div><button
+                  className="bg-blue-600 hover:bg-blue-400 duration-300 rounded-xl text-xl px-3 py-2 mb-2 mr-2 text-white"
                   onClick={handleAdd}
                 >
                   <IoIosAdd />
                 </button>
                 <button
-                  className="bg-blue-600 hover:bg-blue-400 duration-300 rounded-xl text-xl px-3 py-2 mb-2 text-white"
+                  className="bg-blue-600 hover:bg-blue-400 duration-300 rounded-xl text-xl px-3 py-2 mb-2 ml-4 text-white"
                   onClick={toggleRefresh}
                 >
                   <RiRefreshLine />
-                </button>
+                </button></div> : null} 
                 {collection && (
                   <Drawer
                     className="fixed top-16 right-0"
