@@ -20,6 +20,7 @@ const Collection = () => {
   const router = useRouter();
   const workspace = searchParams.get("workspace") || "";
   const collectionid = searchParams.get("collection") || "";
+  const shared = searchParams.get("shared") || "";
   const [isLoading, setIsLoading] = useState(false);
   const [isDataLoading, setIsDataLoading] = useState(false);
   const [dropdownPosition, setDropdownPosition] = useState({ x: 0, y: 0 });
@@ -164,10 +165,13 @@ const Collection = () => {
   };
 
   const updateUrl = (name: string) => {
-    const query: Record<string, string> = { workspace };
-    if (name) query.collection = name;
-    router.push(`?${new URLSearchParams(query).toString()}`);
-    router.push(`?${new URLSearchParams(query).toString()}`);
+    if (shared) {
+      const query = { shared, workspace, collection: name };
+      router.push(`?${new URLSearchParams(query).toString()}`);
+    } else {
+      const query = { workspace, collection: name };
+      router.push(`?${new URLSearchParams(query).toString()}`);
+    }
   };
 
   const colorOptions = [

@@ -180,8 +180,8 @@ function CodeBlock({ isEditable, setIsEditable, shared, setIsOpen }: props) {
     }
   };
   
-  const languages = ["Python", "JavaScript", "Java", "TypeScript", "C++", "React", "Node"];
-  const [selectedLanguage, setSelectedLanguage] = useState<any>();
+  const languages = ["Python", "JavaScript", "Java", "TypeScript", "C++", "React", "Node", "Svelte", "Django", "Solidity", "Solana", "Rust", "Kotlin", "Flutter"];
+  const [selectedLanguage, setSelectedLanguage] = useState<string>("");
 
   const handleClick = () => {};
   
@@ -222,10 +222,13 @@ function CodeBlock({ isEditable, setIsEditable, shared, setIsOpen }: props) {
         {!snippet && (
           <div className="bg-zinc-900 p-2">
             <select
-              className="bg-zinc-900 shadow-zinc-950 shadow-xl text-white p-2"
+              className="bg-zinc-900 shadow-zinc-950 shadow-md text-white p-2"
               value={selectedLanguage}
               onChange={(e) => handleSelect(e)}
             >
+              <option value="" disabled>
+                Select...
+              </option>
               {languages.map((language) => (
                 <option key={language} value={language}>
                   {language}
