@@ -75,27 +75,24 @@ const Collection = () => {
     setSingleCollection(collection);
   };
   const [deleteCollectionModalOpen, setDeleteCollectionModalOpen] =
-    useState(false); 
-     const [editCollectionOpenby, setEditCollectionOpenby] = useState<boolean>(false);
+    useState(false);
+  const [editCollectionOpenby, setEditCollectionOpenby] =
+    useState<boolean>(false);
   const handleOptionClick = (option: string) => {
     console.log("Option clicked:", option);
-    // setIsDropdownOpen(false);
     switch (option) {
       case "edit":
         setEditCollectionOpenby(true);
-        // setDeleteCollectionModalOpen(false);
         console.log("Edit clicked");
         break;
       case "delete":
         console.log("Delete clicked");
         setDeleteCollectionModalOpen(true);
-        
+
         break;
 
       case "share":
         console.log("Share clicked");
-        // setShareModalOpen(true);
-
         break;
       default:
         break;
@@ -108,7 +105,6 @@ const Collection = () => {
 
   console.log("w_id=>", workspace);
 
-  
   const fetchCategories = () => {
     const token = localStorage.getItem("token");
     const headers = {
@@ -128,7 +124,7 @@ const Collection = () => {
   };
   useEffect(() => {
     setIsDataLoading(true);
-    fetch
+    fetch;
     workspace && fetchCategories();
   }, [workspace]);
 
@@ -319,8 +315,6 @@ const Collection = () => {
               Delete <MdDelete className="mt-1" />
             </li>
           </ul>
-          
-          
         </div>
       )}
       <DeleteCollectionModal
@@ -330,11 +324,12 @@ const Collection = () => {
         fetchCategories={fetchCategories}
       />
       <EditCollection
-            open={editCollectionOpenby}
-            onClose={() => setEditCollectionOpenby(false)}
-            workspace={workspace}
-            collection={singleCollection}
-          />
+        open={editCollectionOpenby}
+        onClose={() => setEditCollectionOpenby(false)}
+        workspace={workspace}
+        collection={singleCollection}
+        fetchCategories={fetchCategories}
+      />
     </Suspense>
   );
 };
