@@ -124,6 +124,7 @@ const Collection = () => {
   };
   useEffect(() => {
     setIsDataLoading(true);
+    
     workspace && fetchCategories();
   }, [workspace]);
 
