@@ -12,7 +12,7 @@ const Footer = () => {
 
         <div className="flex items-center gap-x-8 mt-6">
           <a
-            href="https://www.linkedin.com/company/snipsavvy"
+            href="https://www.linkedin.com/company/snipsavvy-official"
             target="_blank"
             className="cursor-pointer"
           >
