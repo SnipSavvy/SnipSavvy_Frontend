@@ -20,9 +20,23 @@ import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import ShareModal from "./ShareModal";
 import EditModal from "./EditModal";
+import { styled } from "@mui/material/styles";
+
+import Tooltip, { TooltipProps, tooltipClasses } from "@mui/material/Tooltip";
+
+// const Tooltip = styled(({ className, ...props }: TooltipProps) => (
+//   <Tooltip {...props} classes={{ popper: className }} />
+// ))({
+//   [`& .${tooltipClasses.tooltip}`]: {
+//     maxWidth: 500,
+//   },
+// });
 
 const Sidebar = () => {
   const [workspace, setWorkspace] = useState<any>([]);
+  const [sharedWorkspace, setSharedWorkspace] = useState<any>([]);
+  const [isSharedOpen, setIsSharedOpen] = useState(false);
+
   const [selectedWorkspace, setSelectedWorkspace] = useState<string | null>(
     null
   );
@@ -61,6 +75,7 @@ const Sidebar = () => {
   // const [singleWorkSpace, setSingleWorkspace] = useState<Workspace>();
   const router = useRouter();
   const session = useSession();
+  const email = session.data?.user?.email;
 
   const fetchWorkspace = () => {
     const token = localStorage.getItem("token");
@@ -71,6 +86,16 @@ const Sidebar = () => {
       .get(`${baseURL}/v1/api/workspace`, { headers })
       .then((response) => {
         setWorkspace(response.data);
+        // setIsDataLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        // setIsDataLoading(false);
+      });
+    axios
+      .get(`${baseURL}/v1/api/workspace?email=${email}`, { headers })
+      .then((response) => {
+        setSharedWorkspace(response.data);
         setIsDataLoading(false);
       })
       .catch((error) => {
@@ -81,8 +106,36 @@ const Sidebar = () => {
 
   useEffect(() => {
     setIsDataLoading(true);
+    const fetchWorkspace = async () => {
+      const token = localStorage.getItem("token");
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+      await axios
+        .get(`${baseURL}/v1/api/workspace`, { headers })
+        .then((response) => {
+          setWorkspace(response.data);
+          // setIsDataLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          // setIsDataLoading(false);
+        });
+      await axios
+        .get(`${baseURL}/v1/api/workspace?email=${email}`, { headers })
+        .then((response) => {
+          setSharedWorkspace(response.data);
+          console.log("shared workspaces =>", response.data);
+          setIsDataLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          setIsDataLoading(false);
+        });
+    };
+
     fetchWorkspace();
-  }, []);
+  }, [email]);
 
   const handleLogOut = () => {
     signOut({ callbackUrl: "https://snipsavvy.vercel.app/" });
@@ -108,6 +161,14 @@ const Sidebar = () => {
     "#0E2954",
     "#3C2A21",
     "#2D4263",
+  ];
+  const sharedcolorOptions = [
+    "#0E2954",
+    "#3C2A21",
+    "#2D4263",
+    "#2E135D",
+    "#164D41",
+    "#4A173E",
   ];
 
   const searchParams = useSearchParams();
@@ -145,7 +206,8 @@ const Sidebar = () => {
   const handleRightClick = (
     e: React.MouseEvent<HTMLDivElement>,
     index: number,
-    workspace: Workspace
+    workspace: any,
+    check: string
   ) => {
     e.preventDefault();
     setDropdownPosition({ x: e.clientX, y: e.clientY });
@@ -153,6 +215,10 @@ const Sidebar = () => {
     setIsDropdownOpen(true);
     setSingleWorkspace(workspace);
     setDeleteWorkspaceId(workspace._id);
+    if (check === "shared") {
+      setIsSharedOpen(true);
+      setDeleteWorkspaceId(workspace.workspace_id);
+    } else setIsSharedOpen(false);
   };
   const [shareModalOpen, setShareModalOpen] = useState<boolean>(false);
   const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
@@ -198,21 +264,29 @@ const Sidebar = () => {
           {!isDataLoading ? (
             workspace?.map((workspace: Workspace, i: number) => {
               return (
-                <div
-                  onClick={() => updateUrl(workspace._id)}
-                  onContextMenu={(e) => handleRightClick(e, i, workspace)}
+                <Tooltip
+                  title={workspace.name}
                   key={workspace._id}
-                  className="h-14 w-14 m-4 rounded-xl cursor-pointer hover:border-4 flex items-center justify-center"
-                  style={{
-                    backgroundColor: colorOptions[i % 6],
-                    boxShadow: "1px 1px 3px 1px #0a0a0aad",
-                    border: w_id === workspace._id ? "4px solid white" : "",
-                  }}
+                  placement="top"
                 >
-                  <p className="text-slate-300 font-bold text-xl pl-4 pt-4">
-                    {workspace.name.substring(0, 2)}
-                  </p>
-                </div>
+                  <div
+                    onClick={() => updateUrl(workspace._id)}
+                    onContextMenu={(e) =>
+                      handleRightClick(e, i, workspace, "owns")
+                    }
+                    key={workspace._id}
+                    className="h-14 w-14 m-4 rounded-xl cursor-pointer hover:border-4 flex items-center justify-center"
+                    style={{
+                      backgroundColor: colorOptions[i % 6],
+                      boxShadow: "1px 1px 3px 1px #0a0a0aad",
+                      border: w_id === workspace._id ? "4px solid white" : "",
+                    }}
+                  >
+                    <p className="text-slate-300 font-bold text-xl pl-4 pt-4">
+                      {workspace.name.substring(0, 2)}
+                    </p>
+                  </div>
+                </Tooltip>
               );
             })
           ) : (
@@ -238,6 +312,48 @@ const Sidebar = () => {
                 height={55}
               />
 
+              <Skeleton
+                sx={{ bgcolor: "grey.700", borderRadius: "10px" }}
+                variant="rectangular"
+                width={55}
+                height={55}
+              />
+            </div>
+          )}
+          <hr className="opacity-40 w-[70%] m-auto" />
+          {!isDataLoading ? (
+            sharedWorkspace?.map((workspace: any, i: number) => {
+              return (
+                <Tooltip
+                  title={`${workspace.workspace_name} - @shared`}
+                  placement="top"
+                  key={workspace.workspace_id}
+                >
+                  <div
+                    onClick={() => updateUrl(workspace.workspace_id)}
+                    onContextMenu={(e) =>
+                      handleRightClick(e, i, workspace, "shared")
+                    }
+                    key={workspace.workspace_id}
+                    className="h-14 w-14 m-4 rounded-xl cursor-pointer hover:border-4 flex items-center justify-center"
+                    style={{
+                      backgroundColor: sharedcolorOptions[i % 6],
+                      boxShadow: "1px 1px 3px 1px #0a0a0aad",
+                      border:
+                        w_id === workspace.workspace_id
+                          ? "4px solid white"
+                          : "",
+                    }}
+                  >
+                    <p className="text-slate-300 font-bold text-xl pl-4 pt-4">
+                      {workspace.workspace_name.substring(0, 2)}
+                    </p>
+                  </div>
+                </Tooltip>
+              );
+            })
+          ) : (
+            <div className="flex flex-col gap-4 mt-6">
               <Skeleton
                 sx={{ bgcolor: "grey.700", borderRadius: "10px" }}
                 variant="rectangular"
@@ -305,26 +421,37 @@ const Sidebar = () => {
           }}
           onBlur={() => closeDropdown()}
         >
-          <ul className="w-20">
-            <li
-              className="cursor-pointer flex justify-between hover:bg-slate-300 hover:text-black p-1 rounded"
-              onClick={() => handleOptionClick("share")}
-            >
-              Share <FaShareAlt className="mt-1" />
-            </li>
-            <li
-              className="cursor-pointer flex justify-between hover:bg-slate-300 hover:text-black p-1 rounded"
-              onClick={() => handleOptionClick("edit")}
-            >
-              Edit <MdEdit className="mt-1" />
-            </li>
-            <li
-              className="cursor-pointer flex justify-between hover:bg-slate-300 hover:text-black p-1 rounded"
-              onClick={() => handleOptionClick("delete")}
-            >
-              Delete <MdDelete className="mt-1" />
-            </li>
-          </ul>
+          {!isSharedOpen ? (
+            <ul className="w-20">
+              <li
+                className="cursor-pointer flex justify-between hover:bg-slate-300 hover:text-black p-1 rounded"
+                onClick={() => handleOptionClick("share")}
+              >
+                Share <FaShareAlt className="mt-1" />
+              </li>
+              <li
+                className="cursor-pointer flex justify-between hover:bg-slate-300 hover:text-black p-1 rounded"
+                onClick={() => handleOptionClick("edit")}
+              >
+                Edit <MdEdit className="mt-1" />
+              </li>
+              <li
+                className="cursor-pointer flex justify-between hover:bg-slate-300 hover:text-black p-1 rounded"
+                onClick={() => handleOptionClick("delete")}
+              >
+                Delete <MdDelete className="mt-1" />
+              </li>
+            </ul>
+          ) : (
+            <ul className="w-20">
+              <li
+                className="cursor-pointer flex justify-between hover:bg-slate-300 hover:text-black p-1 rounded"
+                onClick={() => handleOptionClick("delete")}
+              >
+                Delete <MdDelete className="mt-1" />
+              </li>
+            </ul>
+          )}
         </div>
       )}
       <SettingsModal
@@ -335,6 +462,8 @@ const Sidebar = () => {
         open={deleteModalOpen}
         onClose={() => setDeleteModalOpen(false)}
         workspace_id={deleteWorkspaceId || ""}
+        type={isSharedOpen ? "shared" : ""}
+        email={isSharedOpen ? email : ""}
       />
       <ShareModal
         open={shareModalOpen}
