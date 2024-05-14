@@ -3,6 +3,7 @@
 SnipSavvy is a code snippet management platform, coded by developers for developers
 
 Website Link: https://snipsavvy.vercel.app/
+Backend Repo: https://github.com/SnipSavvy/SnipSavvy_Backend
 
 ![image](https://github.com/SnipSavvy/SnipSavvy_Frontend/assets/169388490/e3be5a71-2ed7-4543-b12e-97e144336797)
 
