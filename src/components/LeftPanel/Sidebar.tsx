@@ -103,7 +103,7 @@ const Sidebar = () => {
         setIsDataLoading(false);
       });
   };
-
+  console.log(email)
   useEffect(() => {
     setIsDataLoading(true);
     const fetchWorkspace = async () => {
@@ -115,6 +115,7 @@ const Sidebar = () => {
         .get(`${baseURL}/v1/api/workspace`, { headers })
         .then((response) => {
           setWorkspace(response.data);
+          console.log("My wworkspaces", response.data)
           // setIsDataLoading(false);
         })
         .catch((error) => {
@@ -287,7 +288,7 @@ const Sidebar = () => {
                     }}
                   >
                     <p className="text-slate-300 font-bold text-xl pl-4 pt-4">
-                      {workspace.name.substring(0, 2)}
+                      {workspace?.name?.substring(0, 2)}
                     </p>
                   </div>
                 </Tooltip>
@@ -355,7 +356,7 @@ const Sidebar = () => {
                     }}
                   >
                     <p className="text-slate-300 font-bold text-xl pl-4 pt-4">
-                      {workspace.workspace_name.substring(0, 2)}
+                      {workspace?.workspace_name?.substring(0, 2)}
                     </p>
                   </div>
                 </Tooltip>
