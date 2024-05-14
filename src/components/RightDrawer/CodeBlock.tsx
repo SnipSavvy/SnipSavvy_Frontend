@@ -24,7 +24,7 @@ interface props {
   isEditable: boolean;
   setIsEditable: any;
   shared: string;
-  setIsOpen: any
+  setIsOpen: any;
 }
 function CodeBlock({ isEditable, setIsEditable, shared, setIsOpen }: props) {
   const [showBox, setShowBox] = useState(false);
@@ -64,13 +64,10 @@ function CodeBlock({ isEditable, setIsEditable, shared, setIsOpen }: props) {
           });
       };
       snippet && fetchCode();
-  
       window.Prism.highlightAll();
-  
     }, [snippet]);
 
   const toggleEditable = () => {
-    setIsEditable(!isEditable);
     const codeElement = document.getElementById("editable-code");
     if (codeElement) {
       codeElement.contentEditable = isEditable ? "false" : "true";
@@ -80,11 +77,13 @@ function CodeBlock({ isEditable, setIsEditable, shared, setIsOpen }: props) {
       const nextSearchParams = new URLSearchParams(searchParams.toString());
       nextSearchParams.append("edit", "true")
       router.push(`${pathname}?${nextSearchParams.toString()}`)
+      setIsEditable(true)
     }
     if(edit){
       const nextSearchParams = new URLSearchParams(searchParams.toString());
       nextSearchParams.delete("edit")
       router.push(`${pathname}?${nextSearchParams.toString()}`)
+      setIsEditable(false)
     }
   };
 
@@ -185,9 +184,6 @@ function CodeBlock({ isEditable, setIsEditable, shared, setIsOpen }: props) {
   const [selectedLanguage, setSelectedLanguage] = useState<any>();
 
   const handleClick = () => {};
-  if(edit === "true"){
-    setIsEditable(true)
-  }
   
   return (
     <Suspense fallback={<div>Loading...</div>}>
