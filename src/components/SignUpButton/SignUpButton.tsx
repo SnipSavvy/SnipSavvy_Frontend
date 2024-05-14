@@ -2,17 +2,19 @@
 import { baseURL } from "@/config";
 import axios from "axios";
 import { signIn, useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
-import React, { useEffect, useState } from "react";
-import Splash from "../SplashScreen/Splash";
+import React, { useLayoutEffect, useState } from "react";
+import LoadingSpinner from "./LoadingSpinner";
+import { useRouter } from "next/navigation";
+
 interface ButtonProps {
   description: string;
 }
 export function SignUpButton({ description }: ButtonProps) {
+  const router = useRouter();
   const session = useSession();
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const CreateUser = async () => {
       const body = {
         name: session.data?.user?.name,
@@ -24,6 +26,7 @@ export function SignUpButton({ description }: ButtonProps) {
         (response) => {
           console.log(response);
           localStorage.setItem("token", `${response.data.token}`);
+          router.push("/workspace");
         },
         (error) => {
           console.log(error);
@@ -31,29 +34,26 @@ export function SignUpButton({ description }: ButtonProps) {
       );
     };
     if (session && session.status === "authenticated") {
-      console.log("before fn call");
       setIsLoading(true);
+
+
       CreateUser();
-      // setTimeout(() => {
-      //   setIsLoading(false);
-      const token = localStorage.getItem("token");
-      if (token) {
-        redirect("/workspace");
-      }
-      // }, 2000);
     }
   }, [session]);
-  const handleSignInGoogle = (e: any) => {
+  const handleSignInGoogle = async (e: any) => {
     e.preventDefault();
-    console.log("in signin");
+    setIsLoading(true);
     signIn("google");
   };
   return (
-    <button
-      onClick={(e) => handleSignInGoogle(e)}
-      className="px-3 py-2 bg-[#045AA6] text-white font-semibold rounded-xl"
-    >
-      {description}
-    </button>
+    <>
+      {isLoading && <LoadingSpinner />}
+      <button
+        onClick={(e) => handleSignInGoogle(e)}
+        className="px-3 py-2 bg-[#045AA6] text-white font-semibold rounded-xl"
+      >
+        {description}
+      </button>
+    </>
   );
 }
