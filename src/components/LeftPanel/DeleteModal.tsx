@@ -10,11 +10,15 @@ interface DeleteModalProps {
   open: boolean;
   onClose: () => void;
   workspace_id: string;
+  type: string;
+  email: any;
 }
 const DeleteModal: React.FC<DeleteModalProps> = ({
   open,
   onClose,
   workspace_id,
+  type,
+  email,
 }) => {
   const handleDelete = async (e: any) => {
     e.preventDefault();
@@ -23,13 +27,37 @@ const DeleteModal: React.FC<DeleteModalProps> = ({
       const headers = {
         Authorization: `Bearer ${token}`,
       };
-      const resp = await axios
-        .delete(`${baseURL}/v1/api/workspace?w_id=${workspace_id}`, { headers })
-        .then((response) => {
-          window.location.reload();
-        });
-      alert("Workspace Removed !!");
-     
+      if (type == "shared") {
+        const body = {
+          workspace_id,
+          email,
+        };
+        await axios
+          .delete(`${baseURL}/v1/api/workspace/shared`, { data: body, headers })
+          .then(
+            (response) => {
+              alert("Shared Workspace Removed !!");
+              window.location.reload();
+            },
+            (error) => {
+              alert("error occured while removing the shared workspace");
+            }
+          );
+      } else {
+        await axios
+          .delete(`${baseURL}/v1/api/workspace?w_id=${workspace_id}`, {
+            headers,
+          })
+          .then(
+            (response) => {
+              alert("Workspace Removed !!");
+              window.location.reload();
+            },
+            (error) => {
+              alert("error occured while removing the workspace");
+            }
+          );
+      }
     } catch (error) {
       alert("error occured while removing the workspace");
     }
