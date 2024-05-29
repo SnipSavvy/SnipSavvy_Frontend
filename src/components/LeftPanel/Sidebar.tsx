@@ -139,6 +139,7 @@ const Sidebar = () => {
   }, [email]);
 
   const handleLogOut = () => {
+    localStorage.removeItem("token");
     signOut({ callbackUrl: "https://snipsavvy.vercel.app/" });
   };
 
