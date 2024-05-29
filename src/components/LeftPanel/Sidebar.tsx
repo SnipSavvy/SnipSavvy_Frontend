@@ -103,7 +103,7 @@ const Sidebar = () => {
         setIsDataLoading(false);
       });
   };
-
+  console.log(email)
   useEffect(() => {
     setIsDataLoading(true);
     const fetchWorkspace = async () => {
@@ -115,6 +115,7 @@ const Sidebar = () => {
         .get(`${baseURL}/v1/api/workspace`, { headers })
         .then((response) => {
           setWorkspace(response.data);
+          console.log("My wworkspaces", response.data)
           // setIsDataLoading(false);
         })
         .catch((error) => {
@@ -141,19 +142,12 @@ const Sidebar = () => {
     signOut({ callbackUrl: "https://snipsavvy.vercel.app/" });
   };
 
-  const updateUrl = (name: string, type?: string, e?: any) => {
-    e.preventDefault();
-
+  const updateUrl = (name: string) => {
     setSelectedWorkspace(name);
     localStorage.setItem("selectedWorkspace", name);
-    if (type) {
-      console.log(type);
-      const query = { shared: "true", workspace: name };
-      router.push(`?${new URLSearchParams(query).toString()}`);
-    } else {
-      const query = { workspace: name };
-      router.push(`?${new URLSearchParams(query).toString()}`);
-    }
+
+    const query = { workspace: name };
+    router.push(`?${new URLSearchParams(query).toString()}`);
   };
 
   interface Workspace {
@@ -271,121 +265,113 @@ const Sidebar = () => {
         {/* Main Workspace */}
 
         <div className="flex-col flex-wrap justify-center">
-          <div
-            className="flex-col flex-wrap justify-center overflow-y-auto "
-            style={{ maxHeight: "300px" }}
-          >
-            {!isDataLoading ? (
-              workspace?.map((workspace: Workspace, i: number) => {
-                return (
-                  <Tooltip
-                    title={workspace.name}
+          <div className="flex-col flex-wrap justify-center overflow-y-auto " style={{maxHeight:"300px"}}>
+          {!isDataLoading ? (
+            workspace?.map((workspace: Workspace, i: number) => {
+              return (
+                <Tooltip
+                  title={workspace.name}
+                  key={workspace._id}
+                  placement="top"
+                >
+                  <div
+                    onClick={() => updateUrl(workspace._id)}
+                    onContextMenu={(e) =>
+                      handleRightClick(e, i, workspace, "owns")
+                    }
                     key={workspace._id}
-                    placement="top"
+                    className="h-14 w-14 m-4 rounded-xl cursor-pointer hover:border-4 flex items-center justify-center"
+                    style={{
+                      backgroundColor: colorOptions[i % 6],
+                      boxShadow: "1px 1px 3px 1px #0a0a0aad",
+                      border: w_id === workspace._id ? "4px solid white" : "",
+                    }}
                   >
-                    <div
-                      onClick={(e) => updateUrl(workspace._id, "", e)}
-                      onContextMenu={(e) =>
-                        handleRightClick(e, i, workspace, "owns")
-                      }
-                      key={workspace._id}
-                      className="h-14 w-14 m-4 rounded-xl cursor-pointer hover:border-4 flex items-center justify-center"
-                      style={{
-                        backgroundColor: colorOptions[i % 6],
-                        boxShadow: "1px 1px 3px 1px #0a0a0aad",
-                        border: w_id === workspace._id ? "4px solid white" : "",
-                      }}
-                    >
-                      <p className="text-slate-300 font-bold text-xl pl-4 pt-4">
-                        {workspace.name.substring(0, 2)}
-                      </p>
-                    </div>
-                  </Tooltip>
-                );
-              })
-            ) : (
-              <div className="flex flex-col gap-4 mt-6">
-                <Skeleton
-                  sx={{ bgcolor: "grey.700", borderRadius: "10px" }}
-                  variant="rectangular"
-                  width={55}
-                  height={55}
-                />
+                    <p className="text-slate-300 font-bold text-xl pl-4 pt-4">
+                      {workspace?.name?.substring(0, 2)}
+                    </p>
+                  </div>
+                </Tooltip>
+              );
+            })
+          ) : (
+            <div className="flex flex-col gap-4 mt-6">
+              <Skeleton
+                sx={{ bgcolor: "grey.700", borderRadius: "10px" }}
+                variant="rectangular"
+                width={55}
+                height={55}
+              />
 
-                <Skeleton
-                  sx={{ bgcolor: "grey.700", borderRadius: "10px" }}
-                  variant="rectangular"
-                  width={55}
-                  height={55}
-                />
+              <Skeleton
+                sx={{ bgcolor: "grey.700", borderRadius: "10px" }}
+                variant="rectangular"
+                width={55}
+                height={55}
+              />
 
-                <Skeleton
-                  sx={{ bgcolor: "grey.700", borderRadius: "10px" }}
-                  variant="rectangular"
-                  width={55}
-                  height={55}
-                />
+              <Skeleton
+                sx={{ bgcolor: "grey.700", borderRadius: "10px" }}
+                variant="rectangular"
+                width={55}
+                height={55}
+              />
 
-                <Skeleton
-                  sx={{ bgcolor: "grey.700", borderRadius: "10px" }}
-                  variant="rectangular"
-                  width={55}
-                  height={55}
-                />
-              </div>
-            )}
+              <Skeleton
+                sx={{ bgcolor: "grey.700", borderRadius: "10px" }}
+                variant="rectangular"
+                width={55}
+                height={55}
+              />
+            </div>
+          )}
           </div>
           <hr className="opacity-40 w-[70%] m-auto" />
 
           {/* Shared Workspace */}
-
-          <div
-            className="flex-col flex-wrap justify-center overflow-y-auto "
-            style={{ maxHeight: "160px" }}
-          >
-            {!isDataLoading ? (
-              sharedWorkspace?.map((workspace: any, i: number) => {
-                return (
-                  <Tooltip
-                    title={`${workspace.workspace_name} - @shared`}
-                    placement="top"
+          
+          <div className="flex-col flex-wrap justify-center overflow-y-auto " style={{maxHeight:"160px"}}  >
+          {!isDataLoading ? (
+            sharedWorkspace?.map((workspace: any, i: number) => {
+              return (
+                <Tooltip
+                  title={`${workspace.workspace_name} - @shared`}
+                  placement="top"
+                  key={workspace.workspace_id}
+                >
+                  <div
+                    onClick={() => updateUrl(workspace.workspace_id)}
+                    onContextMenu={(e) =>
+                      handleRightClick(e, i, workspace, "shared")
+                    }
                     key={workspace.workspace_id}
+                    className="h-14 w-14 m-4 rounded-xl cursor-pointer hover:border-4 flex items-center justify-center"
+                    style={{
+                      backgroundColor: sharedcolorOptions[i % 6],
+                      boxShadow: "1px 1px 3px 1px #0a0a0aad",
+                      border:
+                        w_id === workspace.workspace_id
+                          ? "4px solid white"
+                          : "",
+                    }}
                   >
-                    <div
-                      onClick={(e) =>
-                        updateUrl(workspace.workspace_id, "shared", e)
-                      }
-                      onContextMenu={(e) =>
-                        handleRightClick(e, i, workspace, "shared")
-                      }
-                      key={workspace.workspace_id}
-                      className="h-14 w-14 m-4 rounded-xl cursor-pointer hover:border-4 flex items-center justify-center"
-                      style={{
-                        backgroundColor: sharedcolorOptions[i % 6],
-                        boxShadow: "1px 1px 3px 1px #0a0a0aad",
-                        border:
-                          w_id === workspace.workspace_id
-                            ? "4px solid white"
-                            : "",
-                      }}
-                    >
-                      <p className="text-slate-300 font-bold text-xl pl-4 pt-4">
-                        {workspace.workspace_name.substring(0, 2)}
-                      </p>
-                    </div>
-                  </Tooltip>
-                );
-              })
-            ) : (
-              <div className="flex flex-col gap-4 mt-6">
-                <Skeleton
-                  sx={{ bgcolor: "grey.700", borderRadius: "10px" }}
-                  variant="rectangular"
-                  width={55}
-                  height={55}
-                />
-              </div>
-            )}
+                    <p className="text-slate-300 font-bold text-xl pl-4 pt-4">
+                      {workspace?.workspace_name?.substring(0, 2)}
+                    </p>
+                  </div>
+                </Tooltip>
+              );
+            })
+          ) : (
+            <div className="flex flex-col gap-4 mt-6">
+              <Skeleton
+                sx={{ bgcolor: "grey.700", borderRadius: "10px" }}
+                variant="rectangular"
+                width={55}
+                height={55}
+              />
+            </div>
+          )}
           </div>
         </div>
         <div className="">
