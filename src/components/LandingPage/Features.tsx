@@ -7,8 +7,8 @@ import { FaShare } from "react-icons/fa";
 
 export default function Features() {
   return (
-    <div className=" text-white m-auto ">
-      <div className="max-w-6xl text-center m-auto">
+    <div  id="features" className=" text-white m-auto ">
+      <div  className="max-w-6xl text-center mt-20 m-auto">
         <h2 className="text-4xl font-extrabold text-white sm:text-5xl">
           Everything you need in one platform
         </h2>
