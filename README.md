@@ -53,6 +53,12 @@ Backend Repo: https://github.com/SnipSavvy/SnipSavvy_Backend
 
 ## ⭐Getting Started with Contributing
 
+Refer to this Contributing guide- 
+https://github.com/SnipSavvy/SnipSavvy_Frontend/blob/main/.github/Contribution%20Guide/CONTRIBUTING.md
+
+Refer to this for Issue Template- 
+https://github.com/SnipSavvy/SnipSavvy_Frontend/blob/main/.github/Issue%20Template/new_issue.md
+
 Thank you for considering contributing to our project. Your involvement is invaluable to us. To ensure a smooth and collaborative process, please follow these steps:
 
 **Fork the Repository**: Begin by forking the repository to your personal GitHub account. This will create a copy of the project under your account.
