@@ -7,7 +7,7 @@ import Features from "@/components/LandingPage/Features";
 import Footer from "@/components/LandingPage/Footer";
 import Working from "@/components/LandingPage/Bug";
 import Bug from "@/components/LandingPage/Bug";
-import GoToTop from "@/components/LandingPage/scrollTOtop";
+import GoToTop from "@/components/LandingPage/scrollToTop";
 export default function Component() {
   return (
     <div className="flex flex-col min-h-[100dvh] text-gray-50">
