@@ -7,13 +7,13 @@ import Features from "@/components/LandingPage/Features";
 import Footer from "@/components/LandingPage/Footer";
 import Working from "@/components/LandingPage/Bug";
 import Bug from "@/components/LandingPage/Bug";
-
+import GoToTop from "@/components/LandingPage/scrollToTop";
 export default function Component() {
   return (
     <div className="flex flex-col min-h-[100dvh] text-gray-50">
       <main className="flex-1">
         <Hero />
-
+       
         <section className="w-full py-12 md:py-24 lg:py-24 bg-[#151519] text-gray-50">
           <div className="container px-4 md:px-6">
             <div className=" items-center gap-6  lg:gap-10">
@@ -222,6 +222,7 @@ export default function Component() {
         <UpcomingFeature />
         <Bug />
       </main>
+      <GoToTop/>
       <Footer />
     </div>
   );
