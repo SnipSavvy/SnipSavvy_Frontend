@@ -68,10 +68,10 @@ Thank you for considering contributing to our project. Your involvement is inval
 ``` bash
 git clone <fork-link>
 ```
-**Get the backend**: Fork and clone the backend part of the project from the link above
+**Get the backend**: Fork and clone the backend part of the project from the links above
 
 
-**Install the needed dependencies for both backend and frontend before trying it out in the development environment**
+**Install the needed dependencies for both backend and frontend before trying it out in the development environment**:
 
 ``` sh
 npm install
