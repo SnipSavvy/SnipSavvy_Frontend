@@ -100,6 +100,9 @@ NEXTAUTH_SECRET="Your Secret Key"
 **Note**: To get your Google client ID and Client Secret go to https://console.cloud.google.com/ , go to API and Services and generate your credentials
 
 
+There should be a "Authorized Redirect URIs" in the credentials sections, there copy paste this URI: http://localhost:3000/api/auth/callback/google
+
+
 **Set Up the Backend Development Environment**: Initialize the development environment by running the appropriate command:
 
 ``` sh
