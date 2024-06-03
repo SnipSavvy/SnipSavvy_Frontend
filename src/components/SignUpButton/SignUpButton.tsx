@@ -33,7 +33,9 @@ export function SignUpButton({ description }: ButtonProps) {
         }
       );
     };
-    if (session && session.status === "authenticated") {
+    if(localStorage.getItem("token")){
+      router.push("/workspace");
+    }else if(session && session.status === "authenticated") {
       setIsLoading(true);
 
 
