@@ -1,23 +1,31 @@
 import Link from "next/link";
+import { useState,useEffect } from "react";
 
 export default function Bug() {
+
+  const [theme, setTheme] = useState<String | null>("true")
+
+  useEffect(() => {
+    setTheme(localStorage.getItem("theme"))
+  })
+
   return (
-    <section className="w-full bg-[#151519] py-8 md:py-20 lg:py-28">
+    <section className={`${theme==="true"?"bg-[#151519]":"bg-[#f3f3f8]"} w-full py-8 md:py-20 lg:py-28`}>
       <div className="container px-4 md:px-6">
         <div className="mx-auto max-w-2xl space-y-6 text-center">
-          <h2 className="text-3xl font-bold tracking-tighter text-gray-50 sm:text-4xl md:text-5xl">
+          <h2 className={`${theme==="true"?"text-gray-50":"text-gray-900"} text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl`}>
             Report a Bug!
           </h2>
           <div className="space-y-4 text-left">
             <div className="flex items-start gap-3">
               <div className="flex-shrink-0">
-                <BugIcon className="h-6 w-6 text-gray-400" />
+                <BugIcon className={`${theme==="true"?"text-gray-400":"text-gray-800"} h-6 w-6`} />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-gray-50">
+                <h3 className={`${theme==="true"?"text-gray-50":"text-gray-900"} text-lg font-semibold`}>
                   Raise an issue on the repository
                 </h3>
-                <p className="text-gray-400">
+                <p className={`${theme==="true"?"text-gray-400":"text-black"}`}>
                   If you encounter any bugs or issues while using SnipSavvy,
                   please raise an issue on the repository so our team can
                   investigate and address the problem.
@@ -26,13 +34,13 @@ export default function Bug() {
             </div>
             <div className="flex items-start gap-3">
               <div className="flex-shrink-0">
-                <GitPullRequestIcon className="h-6 w-6 text-gray-400" />
+                <GitPullRequestIcon className={`${theme==="true"?"text-gray-400":"text-gray-800"} h-6 w-6`} />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-gray-50">
+                <h3 className={`${theme==="true"?"text-gray-50":"text-gray-900"} text-lg font-semibold`}>
                   Contribute to the repository
                 </h3>
-                <p className="text-gray-400">
+                <p className={`${theme==="true"?"text-gray-400":"text-black"}`}>
                   If you have the skills and expertise to fix the bug or improve
                   SnipSavvy, we welcome your contributions. Please submit a pull
                   request with your changes, and our team will review and merge
@@ -49,7 +57,7 @@ export default function Bug() {
               Raise an Issue
             </Link>
             <Link
-              className="inline-flex h-10 items-center justify-center rounded-md border border-gray-400 bg-transparent px-8 text-sm font-medium text-gray-50 shadow-sm transition-colors hover:bg-gray-800 hover:text-gray-50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-gray-50 dark:focus-visible:ring-gray-300"
+              className={`${theme==="true"?"text-gray-50":"text-gray-900"} inline-flex h-10 items-center justify-center rounded-md border border-gray-400 bg-transparent px-8 text-sm font-medium shadow-sm transition-colors hover:bg-gray-800 hover:text-gray-50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-gray-50 dark:focus-visible:ring-gray-300`}
               href="https://github.com/SnipSavvy?tab=repositories"
             >
               Contribute

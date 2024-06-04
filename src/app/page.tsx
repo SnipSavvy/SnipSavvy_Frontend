@@ -1,3 +1,4 @@
+"use client"
 import { Button } from "@/components/LandingPage/Button";
 import Link from "next/link";
 import { SignUpButton } from "@/components/SignUpButton/SignUpButton";
@@ -7,14 +8,27 @@ import Features from "@/components/LandingPage/Features";
 import Footer from "@/components/LandingPage/Footer";
 import Working from "@/components/LandingPage/Bug";
 import Bug from "@/components/LandingPage/Bug";
+import { useEffect, useState } from "react";
 
 export default function Component() {
+
+  const [bool, setBool] = useState<Boolean>(true)
+  const [theme, setTheme] = useState<String | null>("true")
+
+  useEffect(() => {
+    setTheme(localStorage.getItem("theme"))
+  }, [])
+
+  useEffect(() => {
+    setTheme(localStorage.getItem("theme"))
+  }, [bool])
+
   return (
     <div className="flex flex-col min-h-[100dvh] text-gray-50">
       <main className="flex-1">
-        <Hero />
+        <Hero bool={bool} setBool={setBool} />
 
-        <section className="w-full py-12 md:py-24 lg:py-24 bg-[#151519] text-gray-50">
+        <section className={`${theme === "true" ? "bg-[#151519]" : "bg-[#eeeef4]"} w-full py-12 md:py-24 lg:py-24 text-gray-50`}>
           <div className="container px-4 md:px-6">
             <div className=" items-center gap-6  lg:gap-10">
               <div className="flex justify-center space-y-4">
@@ -58,12 +72,12 @@ export default function Component() {
             </div>
           </div>
         </section>
-        <section className="w-full py-12 md:py-20 lg:pt-32 pb-24 bg-[#0E0E11] px-32">
+        <section className={`${theme === "true" ? "bg-[#0E0E11] text-gray-50" : "bg-[#ffffff] text-black"} w-full py-12 md:py-20 lg:pt-32 pb-24 px-32`}>
           <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6 lg:gap-10">
             <div className="space-y-3">
               <h2
                 // style={{ textShadow: "0px 0px 10px #006BCB" }}
-                className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-gray-50"
+                className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl "
               >
                 SnipSavvy Offers
               </h2>
@@ -73,7 +87,7 @@ export default function Component() {
           </div>
           <div className="overflow-y-hidden">
             <div className="pb-16" style={{ fontFamily: '"Lato", sans-serif' }}>
-              <section className="bg-[#0E0E11] py-2">
+              <section className={`${theme==="true" ? "bg-[#0E0E11] text-white" : "bg-white text-black"} py-2`}>
                 <div
                   tabIndex={0}
                   aria-label="group of cards"
@@ -99,13 +113,13 @@ export default function Component() {
                       <div className="md:w-9/12 lg:w-9/12">
                         <h2
                           tabIndex={0}
-                          className="focus:outline-none text-lg font-semibold leading-5 text-white"
+                          className="focus:outline-none text-lg font-semibold leading-5"
                         >
                           Save Time
                         </h2>
                         <p
                           tabIndex={0}
-                          className="focus:outline-none text-base text-white leading-normal xl:w-10/12 pt-2"
+                          className="focus:outline-none text-base leading-normal xl:w-10/12 pt-2"
                         >
                           Quickly find and reuse the code snippets you need,
                           reducing development time and increasing productivity.
@@ -129,13 +143,13 @@ export default function Component() {
                       <div className="md:w-9/12 lg:w-9/12 ">
                         <h2
                           tabIndex={0}
-                          className="focus:outline-none text-lg font-semibold leading-5 text-white"
+                          className="focus:outline-none text-lg font-semibold leading-5"
                         >
                           Stay Organized
                         </h2>
                         <p
                           tabIndex={0}
-                          className="focus:outline-none text-base text-white leading-normal xl:w-10/12 pt-2"
+                          className="focus:outline-none text-base leading-normal xl:w-10/12 pt-2"
                         >
                           Keep your code snippets neatly organized and easily
                           accessible, so you can focus on writing great code.
@@ -162,13 +176,13 @@ export default function Component() {
                       <div className="md:w-9/12 lg:w-9/12 ">
                         <h2
                           tabIndex={0}
-                          className="focus:outline-none text-lg font-semibold leading-5 text-white"
+                          className="focus:outline-none text-lg font-semibold leading-5"
                         >
                           Personalized Experience
                         </h2>
                         <p
                           tabIndex={0}
-                          className="focus:outline-none text-base text-white leading-normal xl:w-10/12 pt-2"
+                          className="focus:outline-none text-base leading-normal xl:w-10/12 pt-2"
                         >
                           Empowers users with personalized workspaces and
                           repositories tailored to their individual preferences
@@ -194,13 +208,13 @@ export default function Component() {
                       <div className="md:w-9/12 lg:w-9/12 ">
                         <h2
                           tabIndex={0}
-                          className="focus:outline-none text-lg font-semibold leading-5 text-white"
+                          className="focus:outline-none text-lg font-semibold leading-5"
                         >
                           Effortless Collaboration
                         </h2>
                         <p
                           tabIndex={0}
-                          className="focus:outline-none text-base text-white leading-normal xl:w-10/12 pt-2"
+                          className="focus:outline-none text-base leading-normal xl:w-10/12 pt-2"
                         >
                           Share and collaborate on code snippets with your team,
                           ensuring everyone has access to the resources they

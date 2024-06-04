@@ -1,17 +1,47 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SignUpButton } from "../SignUpButton/SignUpButton";
 import Image from "next/image";
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  bool: Boolean
+  setBool: React.Dispatch<React.SetStateAction<Boolean>>;
+}
+
+const Hero: React.FC<HeroProps> = ({ bool, setBool }) => {
   const [menu, setMenu] = useState<boolean>(false);
+  const [theme, setTheme] = useState<String | null>("true")
+
+  useEffect(() => {
+    setTheme(localStorage.getItem("theme"))
+  }, [])
+
+
+  const handleClick = () => {
+    setTheme((prevtheme) => {
+      if (prevtheme === "true") {
+        return "false"
+      } else {
+        return "true"
+      }
+    })
+    let themeb;
+    if (theme === "true") {
+      themeb = false
+    } else {
+      themeb = true
+    }
+    localStorage.setItem("theme", JSON.stringify(themeb))
+    setBool(!bool)
+  }
+
 
   return (
     <>
-      <div className="relative w-full h-screen bg-[#0E1116]">
+      <div className={`${theme === "true" ? "bg-[#0E1116]" : "bg-[#e5eaf2]"} relative w-full h-screen`}>
         <div className="hidden md:block">
           <Image
-            className=" w-full h-full relative"
+            className={`${theme === "true" ? "opacity-100" : "opacity-0"} w-full h-full relative`}
             src="/hero.png"
             alt=""
             layout="fill"
@@ -112,8 +142,12 @@ const Hero: React.FC = () => {
               />
             </div>
             <div className="flex items-center text-white text-base font-medium">
-              <ul className="flex items-center pr-3 xl:pr-12">
-                <li className="cursor-pointer hover:text-gray-300 ease-in">
+              <ul className={`flex items-center pr-3 xl:pr-12`}>
+                <div onClick={handleClick} className={`${theme === "true" ? "border-yellow-400" : "border-black"} p-1 mr-5 svgs cursor-pointer rounded-full border-2`}>
+                  {theme === "true" ? <img className="w-6 h-6" src="idea-01-stroke-rounded.svg" alt="" /> :
+                    <img className="w-6 h-6" src="moon-02-stroke-rounded.svg" alt="" />}
+                </div>
+                <li className={`${theme === "true" ? "text-white hover:text-gray-300" : "text-black hover:text-gray-700"} cursor-pointer ease-in`}>
                   <a
                     href=""
                     className="focus:outline-none focus:ring-2 focus:ring-white"
@@ -121,7 +155,7 @@ const Hero: React.FC = () => {
                     Home
                   </a>
                 </li>
-                <li className="pl-3 lg:pl-5 xl:pl-8 cursor-pointer hover:text-gray-300 ease-in">
+                <li className={`${theme === "true" ? "text-white hover:text-gray-300" : "text-black hover:text-gray-700"} pl-3 lg:pl-5 xl:pl-8 cursor-pointer ease-in`}>
                   <a
                     href=""
                     className="focus:outline-none focus:ring-2 focus:ring-white"
@@ -130,7 +164,7 @@ const Hero: React.FC = () => {
                   </a>
                 </li>
 
-                <li className="pl-3 lg:pl-5 xl:pl-8 cursor-pointer hover:text-gray-300 ease-in">
+                <li className={`${theme === "true" ? "text-white hover:text-gray-300" : "text-black hover:text-gray-700"} pl-3 lg:pl-5 xl:pl-8 cursor-pointer ease-in`}>
                   <a
                     href="https://github.com/SnipSavvy?tab=repositories"
                     target="_blank"
@@ -145,8 +179,8 @@ const Hero: React.FC = () => {
           </div>
         </nav>
         <div className="relative px-4 xl:px-0 container mx-auto md:flex mt-20 justify-between items-center gap-4">
-          <div className="text-color w-full md:w-[40%]">
-            <h1 className="text-4xl md:text-4xl lg:text-6xl w-11/12 lg:w-11/12 xl:w-full xl:text-6xl text-white font-extrabold f-f-l">
+          <div className={`${theme === "true" ? "text-white" : "text-black"} text-color w-full md:w-[40%]`}>
+            <h1 className="text-4xl md:text-4xl lg:text-6xl w-11/12 lg:w-11/12 xl:w-full xl:text-6xl font-extrabold f-f-l">
               Manage Your Code Snippets with Ease
             </h1>
             <div className="f-f-r text-base lg:text-base pb-20 sm:pb-0 pt-10 xl:pt-6">
