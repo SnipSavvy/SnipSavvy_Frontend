@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { SignUpButton } from "../SignUpButton/SignUpButton";
 import Image from "next/image";
+import Link from "next/link"; // Import Link
 
 interface HeroProps {
   bool: Boolean
@@ -35,13 +36,13 @@ const Hero: React.FC<HeroProps> = ({ bool, setBool }) => {
     setBool(!bool)
   }
 
-
   return (
     <>
       <div className={`${theme === "true" ? "bg-[#0E1116]" : "bg-[#e5eaf2]"} relative w-full h-screen`}>
         <div className="hidden md:block">
           <Image
             className={`${theme === "true" ? "opacity-100" : "opacity-0"} w-full h-full relative`}
+            className="w-full h-full relative"
             src="/hero.png"
             alt=""
             layout="fill"
@@ -73,44 +74,29 @@ const Hero: React.FC<HeroProps> = ({ bool, setBool }) => {
                 className={`${menu ? "" : "hidden"} p-2 border-r bg-white absolute rounded top-0 left-0 right-0 shadow mt-24`}
               >
                 <li className="flex cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                  <a
-                    href=""
-                    className="ml-2 focus:outline-none focus:ring-2 focus:ring-black"
-                  >
+                  <Link href="/" className="ml-2 focus:outline-none focus:ring-2 focus:ring-black">
                     <span className="font-bold">Home</span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="flex cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                  <a
-                    href=""
-                    className="ml-2 focus:outline-none focus:ring-2 focus:ring-black"
-                  >
+                  <Link href="/features" className="ml-2 focus:outline-none focus:ring-2 focus:ring-black">
                     <span className="font-bold">Features</span>
-                  </a>
+                  </Link>
                 </li>
-                <li className="flex cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700  items-center focus:text-indigo-700 focus:outline-none">
-                  <a
-                    href=""
-                    className="ml-2 focus:outline-none focus:ring-2 focus:ring-black"
-                  >
+                <li className="flex cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 items-center focus:text-indigo-700 focus:outline-none">
+                  <Link href="/" className="ml-2 focus:outline-none focus:ring-2 focus:ring-black">
                     <span className="font-bold">Pricing</span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="flex cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                  <a
-                    href=""
-                    className="ml-2 focus:outline-none focus:ring-2 focus:ring-black"
-                  >
+                  <Link href="/" className="ml-2 focus:outline-none focus:ring-2 focus:ring-black">
                     <span className="font-bold">Github</span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="flex cursor-pointer text-gray-600 text-sm leading-3 tracking-normal pt-2 pb-4 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                  <a
-                    href=""
-                    className="ml-2 focus:outline-none focus:ring-2 focus:ring-black"
-                  >
+                  <Link href="/" className="ml-2 focus:outline-none focus:ring-2 focus:ring-black">
                     <span className="font-bold">Sign In</span>
-                  </a>
+                  </Link>
                 </li>
               </ul>
               <div className="xl:hidden">
@@ -152,26 +138,32 @@ const Hero: React.FC<HeroProps> = ({ bool, setBool }) => {
                     href=""
                     className="focus:outline-none focus:ring-2 focus:ring-white"
                   >
+              <ul className="flex items-center pr-3 xl:pr-12">
+                <li className="cursor-pointer hover:text-gray-300 ease-in">
+                  <Link href="/" className="focus:outline-none focus:ring-2 focus:ring-white">
                     Home
-                  </a>
+                  </Link>
                 </li>
                 <li className={`${theme === "true" ? "text-white hover:text-gray-300" : "text-black hover:text-gray-700"} pl-3 lg:pl-5 xl:pl-8 cursor-pointer ease-in`}>
                   <a
                     href=""
                     className="focus:outline-none focus:ring-2 focus:ring-white"
                   >
+                <li className="pl-3 lg:pl-5 xl:pl-8 cursor-pointer hover:text-gray-300 ease-in">
+                  <Link href="#features" className="focus:outline-none focus:ring-2 focus:ring-white">
                     Features
-                  </a>
+                  </Link>
                 </li>
-
                 <li className={`${theme === "true" ? "text-white hover:text-gray-300" : "text-black hover:text-gray-700"} pl-3 lg:pl-5 xl:pl-8 cursor-pointer ease-in`}>
                   <a
                     href="https://github.com/SnipSavvy?tab=repositories"
                     target="_blank"
                     className="focus:outline-none focus:ring-2 focus:ring-white"
                   >
+                <li className="pl-3 lg:pl-5 xl:pl-8 cursor-pointer hover:text-gray-300 ease-in">
+                  <Link href="https://github.com/SnipSavvy?tab=repositories" target="_blank" className="focus:outline-none focus:ring-2 focus:ring-white">
                     Github
-                  </a>
+                  </Link>
                 </li>
               </ul>
               <SignUpButton description="Sign In"></SignUpButton>
