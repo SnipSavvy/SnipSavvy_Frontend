@@ -133,35 +133,19 @@ const Hero: React.FC = () => {
                     <img className="w-6 h-6" src="moon-02-stroke-rounded.svg" alt="" />}
                 </div>
                 <li className={`${theme === "true" ? "text-white hover:text-gray-300" : "text-black hover:text-gray-700"} cursor-pointer ease-in`}>
-                  <a
-                    href=""
-                    className="focus:outline-none focus:ring-2 focus:ring-white"
-                  >
                     <Link href="/" className="focus:outline-none focus:ring-2 focus:ring-white">
                     Home
                   </Link>
-                  </a>
                 </li>
                 <li className={`${theme === "true" ? "text-white hover:text-gray-300" : "text-black hover:text-gray-700"} pl-3 lg:pl-5 xl:pl-8 cursor-pointer ease-in`}>
-                  <a
-                    href=""
-                    className="focus:outline-none focus:ring-2 focus:ring-white"
-                  >
                      <Link href="#features" className="focus:outline-none focus:ring-2 focus:ring-white">
                     Features
                   </Link>
-                  </a>
                 </li>
                 <li className={`${theme === "true" ? "text-white hover:text-gray-300" : "text-black hover:text-gray-700"} pl-3 lg:pl-5 xl:pl-8 cursor-pointer ease-in`}>
-                  <a
-                    href="https://github.com/SnipSavvy?tab=repositories"
-                    target="_blank"
-                    className="focus:outline-none focus:ring-2 focus:ring-white"
-                  >
                     <Link href="https://github.com/SnipSavvy?tab=repositories" target="_blank" className="focus:outline-none focus:ring-2 focus:ring-white">
                     Github
                   </Link>
-                  </a>
                 </li>
               </ul>
               <SignUpButton description="Sign In"></SignUpButton>
