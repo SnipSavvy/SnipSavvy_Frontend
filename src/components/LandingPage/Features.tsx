@@ -4,14 +4,10 @@ import { MdAssistantNavigation } from "react-icons/md";
 import { FaSearch } from "react-icons/fa";
 import { CiShare2 } from "react-icons/ci";
 import { FaShare } from "react-icons/fa";
-import { useState, useEffect } from "react";
+import { useThemeContext } from "./ThemeContext";
 
 export default function Features() {
-  const [theme, setTheme] = useState<String | null>("true")
-
-  useEffect(() => {
-    setTheme(localStorage.getItem("theme"))
-  })
+  const { theme, setTheme } = useThemeContext()
 
   return (
     <div className={`${theme === "true" ? "text-white" : "text-black"} m-auto`}>
@@ -43,7 +39,7 @@ export default function Features() {
             </p>
           </div>
 
-          <div className={`${theme==="true"?"bg-black border-black":"bg-white border-white"} flex flex-col items-center p-6 space-y-4 bg-opacity-20 rounded-lg  border-2 border-opacity-20 hover:border-[#00AEFF] hover:rounded-xl transition-all shadow-md`}>
+          <div className={`${theme === "true" ? "bg-black border-black" : "bg-white border-white"} flex flex-col items-center p-6 space-y-4 bg-opacity-20 rounded-lg  border-2 border-opacity-20 hover:border-[#00AEFF] hover:rounded-xl transition-all shadow-md`}>
             <MdAssistantNavigation size={30} />
             <h3 className="text-xl font-semibold">Intuitive Navigation</h3>
             <p className="text-center text-sm">
@@ -51,7 +47,7 @@ export default function Features() {
               streamlined management.
             </p>
           </div>
-          <div className={`${theme==="true"?"bg-black border-black":"bg-white border-white"} flex flex-col items-center p-6 space-y-4 bg-opacity-20 rounded-lg  border-2 border-opacity-20 hover:border-[#00AEFF] hover:rounded-xl transition-all shadow-md`}>
+          <div className={`${theme === "true" ? "bg-black border-black" : "bg-white border-white"} flex flex-col items-center p-6 space-y-4 bg-opacity-20 rounded-lg  border-2 border-opacity-20 hover:border-[#00AEFF] hover:rounded-xl transition-all shadow-md`}>
             <FaSearch size={30} />
             <h3 className="text-xl font-semibold">
               Global Search Functionality
@@ -61,7 +57,7 @@ export default function Features() {
               retrieval.{" "}
             </p>
           </div>
-          <div className={`${theme==="true"?"bg-black border-black":"bg-white border-white"} flex flex-col items-center p-6 space-y-4 bg-opacity-20 rounded-lg  border-2 border-opacity-20 hover:border-[#00AEFF] hover:rounded-xl transition-all shadow-md`}>
+          <div className={`${theme === "true" ? "bg-black border-black" : "bg-white border-white"} flex flex-col items-center p-6 space-y-4 bg-opacity-20 rounded-lg  border-2 border-opacity-20 hover:border-[#00AEFF] hover:rounded-xl transition-all shadow-md`}>
             <CiShare2 size={30} />
             <h3 className="text-xl font-semibold">
               Collaborative Workspace Sharing
@@ -71,7 +67,7 @@ export default function Features() {
               collaboration.{" "}
             </p>
           </div>
-          <div className={`${theme==="true"?"bg-black border-black":"bg-white border-white"} flex flex-col items-center p-6 space-y-4 bg-opacity-20 rounded-lg  border-2 border-opacity-20 hover:border-[#00AEFF] hover:rounded-xl transition-all shadow-md`}>
+          <div className={`${theme === "true" ? "bg-black border-black" : "bg-white border-white"} flex flex-col items-center p-6 space-y-4 bg-opacity-20 rounded-lg  border-2 border-opacity-20 hover:border-[#00AEFF] hover:rounded-xl transition-all shadow-md`}>
             <FaShare size={30} />
             <h3 className="text-xl font-semibold">Flexible Sharing Options</h3>
             <p className="text-center text-sm">

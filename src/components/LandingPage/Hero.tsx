@@ -2,22 +2,22 @@
 import React, { useEffect, useState } from "react";
 import { SignUpButton } from "../SignUpButton/SignUpButton";
 import Image from "next/image";
+import { useThemeContext } from './ThemeContext';
 
-interface HeroProps {
-  bool: Boolean
-  setBool: React.Dispatch<React.SetStateAction<Boolean>>;
-}
-
-const Hero: React.FC<HeroProps> = ({ bool, setBool }) => {
+const Hero: React.FC = () => {
   const [menu, setMenu] = useState<boolean>(false);
-  const [theme, setTheme] = useState<String | null>("true")
+  const { bool, setBool } = useThemeContext();
+  const { theme, setTheme } = useThemeContext()
 
   useEffect(() => {
-    setTheme(localStorage.getItem("theme"))
+    if(localStorage.getItem("theme")){
+      setTheme(localStorage.getItem("theme"))
+    }
   }, [])
 
 
   const handleClick = () => {
+    console.log(theme)
     setTheme((prevtheme) => {
       if (prevtheme === "true") {
         return "false"

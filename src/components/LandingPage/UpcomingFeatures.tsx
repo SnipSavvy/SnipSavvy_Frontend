@@ -1,21 +1,18 @@
+"use client"
 import React from "react";
 import { SiGooglegemini } from "react-icons/si";
 import { FaHistory } from "react-icons/fa";
 import { TbUsersGroup } from "react-icons/tb";
 import { IoExtensionPuzzle } from "react-icons/io5";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useThemeContext } from "./ThemeContext";
 
 const UpcomingFeature: React.FC = () => {
 
-  const [theme, setTheme] = useState<String | null>("true")
-
-  useEffect(() => {
-    setTheme(localStorage.getItem("theme"))
-  })
+  const { theme, setTheme } = useThemeContext()
 
   return (
-    <div className={`${theme==="true" ? "bg-[#0E0E11] text-gray-200" : "bg-white text-black"} overflow-y-hidden px-32`}>
+    <div className={`${theme === "true" ? "bg-[#0E0E11] text-gray-200" : "bg-white text-black"} overflow-y-hidden px-32`}>
       <div className="xl:mx-auto xl:container mb-20 xl:px-20 md:px-6 px-4 ">
         <div className="lg:flex items-center justify-center lg:space-x-12 2xl:space-x-6">
           <div className="w-[80%]">
@@ -108,7 +105,7 @@ const UpcomingFeature: React.FC = () => {
               src="/goku.gif"
               alt="ongoing meeting"
               unoptimized
-              className={`${theme==="true"?"":"shadow-2xl shadow-black"} w-[72%] object-fit object-center object-fill h-[53vh] ml-28 rounded-xl opacity-90`}
+              className={`${theme === "true" ? "" : "shadow-2xl shadow-black"} w-[72%] object-fit object-center object-fill h-[53vh] ml-28 rounded-xl opacity-90`}
             />
           </div>
         </div>

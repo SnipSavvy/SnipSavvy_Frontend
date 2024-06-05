@@ -1,13 +1,10 @@
+"use client"
 import Link from "next/link";
-import { useState,useEffect } from "react";
+import { useThemeContext } from "./ThemeContext";
 
 export default function Bug() {
 
-  const [theme, setTheme] = useState<String | null>("true")
-
-  useEffect(() => {
-    setTheme(localStorage.getItem("theme"))
-  })
+  const { theme, setTheme } = useThemeContext()
 
   return (
     <section className={`${theme==="true"?"bg-[#151519]":"bg-[#f3f3f8]"} w-full py-8 md:py-20 lg:py-28`}>

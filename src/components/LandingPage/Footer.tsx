@@ -1,15 +1,12 @@
+"use client"
 import Image from "next/image";
 import React from "react";
 import { FaLinkedin } from "react-icons/fa";
-import { useState,useEffect } from "react";
+import { useThemeContext } from "./ThemeContext";
 
 const Footer = () => {
 
-  const [theme, setTheme] = useState<String | null>("true")
-
-  useEffect(() => {
-    setTheme(localStorage.getItem("theme"))
-  })
+  const { theme, setTheme } = useThemeContext()
 
   return (
     <div className={`${theme==="true"?"bg-[#0E0E11] text-gray-300":"bg-white text-black"} xl:px-20 lg:px-12 sm:px-6 px-4 py-12`}>

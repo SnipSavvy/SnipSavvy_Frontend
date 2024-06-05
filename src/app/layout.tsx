@@ -1,8 +1,11 @@
+// layout.tsx
 import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import Head from "next/head";
 import AuthProvider from "@/components/AuthProvider/AuthProvider";
+import { ThemeProvider } from "../components/LandingPage/ThemeContext"; // Import your ThemeProvider
+
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -30,13 +33,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           fontSans.variable
         )}
       >
-        {/* <Navbar /> */}
-
         <div className=" bg-black">
           <div className="">
             <div className=" items-center min-h-screen bg-black">
               <div>
-                <AuthProvider>{children}</AuthProvider>
+                <AuthProvider>
+                  <ThemeProvider>
+                    {children}
+                  </ThemeProvider>
+                </AuthProvider>
               </div>
             </div>
           </div>
