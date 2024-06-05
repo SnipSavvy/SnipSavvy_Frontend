@@ -10,7 +10,7 @@ export default function Features() {
   const { theme, setTheme } = useThemeContext()
 
   return (
-    <div className={`${theme === "true" ? "text-white" : "text-black"} m-auto`}>
+    <div id="features" className={`${theme === "true" ? "text-white" : "text-black"} m-auto`}>
       <div className="max-w-6xl text-center m-auto">
         <h2 className="text-4xl font-extrabold sm:text-5xl">
           Everything you need in one platform

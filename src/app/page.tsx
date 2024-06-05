@@ -8,20 +8,23 @@ import Working from "@/components/LandingPage/Bug";
 import Bug from "@/components/LandingPage/Bug";
 import Section from "@/components/LandingPage/Section";
 import Hero from "@/components/LandingPage/Hero";
+import { useEffect, useState } from "react";
+import GoToTop from "@/components/LandingPage/scrollToTop";
 
 const Component: React.FC = () => {
-
   return (
     <div className="flex flex-col min-h-[100dvh] text-gray-50">
       <main className="flex-1">
         <Hero />
         <Section />
+       
 
         {/* <Working /> */}
 
         <UpcomingFeature />
         <Bug />
       </main>
+      <GoToTop/>
       <Footer />
     </div>
   );

@@ -23,7 +23,7 @@ type LayoutProps = {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <html>
+    <html className="scroll-smooth">
       <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>
