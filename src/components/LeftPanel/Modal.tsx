@@ -9,6 +9,7 @@ import Image from "next/image";
 // import Workspace from "../../../public/workspace.jpg";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
+import { ToastContainer, toast } from 'react-toastify';
 import {
   Dialog,
   DialogContent,
@@ -21,6 +22,37 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { baseURL } from "@/config";
+import { string } from "zod";
+
+
+const workspaceWarningToast = (placeholder: string, duration: number = 2000) => {
+  toast.error(`Don't leave the ${placeholder} field empty!`, {
+    autoClose: duration,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    style: {
+      background: '#333333',
+      color: 'white',
+      fontFamily: 'Arial, sans-serif',
+      fontSize: '16px',
+      fontWeight: 'bold',
+      borderRadius: '8px',
+      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+      padding: '16px',
+      textAlign: 'center',
+      width: '160%'
+    },
+    
+    progressStyle: {
+      background: 'white'
+    }
+  })
+};
+
+
 
 export default function Modal({ fetchWorkspace }: any) {
   const [open, setOpen] = React.useState(false);
@@ -34,30 +66,40 @@ export default function Modal({ fetchWorkspace }: any) {
     setOpen(false);
     alert("Works space created!");
   };
-  const handleCreateWorkspace = async () => {
-    const body = {
-      name: data.name,
-      description: data.description,
-    };
-    const token = localStorage.getItem("token");
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
 
-    await axios.post(`${baseURL}/v1/api/workspace`, body, { headers }).then(
-      (response) => {
-        console.log(response);
-        alert("Workspace Created");
-        window.location.reload();
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+
+  const handleCreateWorkspace = async () => {
+    if(data.name == '')
+      workspaceWarningToast('name')
+    if(data.description == '')
+      workspaceWarningToast('description')
+
+    if(data.name != '' && data.description != ''){
+      const body = {
+        name: data.name,
+        description: data.description,
+      };
+      const token = localStorage.getItem("token");
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+  
+      await axios.post(`${baseURL}/v1/api/workspace`, body, { headers }).then(
+        (response) => {
+          console.log(response);
+          alert("Workspace Created");
+          window.location.reload();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
   };
 
   return (
     <Dialog>
+      <ToastContainer position="top-left"/>
       <DialogTrigger asChild>
         <Button className="hover:bg-zinc-600 hover:rounded duration-300 font-bold text-3xl ">
           +
