@@ -44,6 +44,7 @@ const EditModal: React.FC<EditModalProps> = ({ open, onClose, workspace }) => {
   }, [workspace]);
 
   const handleEditWorkspace = async () => {
+    
     const body = {
       id: workspace._id,
       name: newName,
