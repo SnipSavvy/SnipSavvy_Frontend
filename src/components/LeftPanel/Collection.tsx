@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, Suspense } from "react";
+import { ToastContainer, toast } from 'react-toastify';
 import { FaFolderOpen } from "react-icons/fa";
 import axios from "axios";
 import { Input } from "@/components/ui/input";
@@ -12,6 +13,8 @@ import { MdEdit, MdDelete } from "react-icons/md";
 import { baseURL } from "@/config";
 import DeleteCollectionModal from "./DeleteCollectionModal";
 import EditCollection from "./EditCollection";
+
+
 const Collection = () => {
   const [showInput, setShowInput] = useState(false);
   const [collection, setCollection] = useState<any>([]);
@@ -132,6 +135,29 @@ const Collection = () => {
     setShowInput(!showInput);
   };
 
+
+  const showToast = () => {
+    toast.warning("Create & Choose a Workspace first to make a collection!", {
+      autoClose: 2000,
+      style: {
+        background: '#333333',
+        color: 'white',
+        fontFamily: 'Arial, sans-serif',
+        fontSize: '16px',
+        fontWeight: 'bold',
+        borderRadius: '8px',
+        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+        padding: '16px',
+        textAlign: 'center',
+        width: '160%'
+      },
+      progressStyle: {
+        background: 'white'
+      }
+    })
+  };
+
+
   const handleCreateCollection = async () => {
     setIsLoading(true);
     const body = {
@@ -153,7 +179,9 @@ const Collection = () => {
         setIsLoading(false);
       })
       .catch((error) => {
-        console.log(error);
+        //if 404 error -> workspace not found
+        if(error.response.status == 500)
+            showToast()
         setIsLoading(false);
       });
   };
@@ -190,6 +218,8 @@ const Collection = () => {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
+      <ToastContainer position="bottom-left"/>
+
       <div className="w-[20vw] bg-[#1a1b1c] overflow-none">
         <div>
           <div className="flex m-8 items-center justify- ">
@@ -217,6 +247,7 @@ const Collection = () => {
                 onChange={(e) => setData(e.target.value)}
                 onKeyDown={handleKeyPress}
               />
+
 
               {!isLoading ? (
                 <Button

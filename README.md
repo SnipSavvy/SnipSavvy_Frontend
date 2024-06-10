@@ -51,6 +51,9 @@ Backend Repo: https://github.com/SnipSavvy/SnipSavvy_Backend
  * **Material UI**
 
 
+<br />
+
+
 ## ⭐Getting Started with Contributing
 
 Refer to this Contributing guide- 
@@ -155,6 +158,47 @@ git push origin <branch-name>
 We greatly appreciate your contributions and look forward to reviewing your pull request.
 
 ![image](https://github.com/SnipSavvy/SnipSavvy_Frontend/assets/169388490/c9fa4d44-a709-4fac-85e0-07c5fcad6626)
+
+
+<br />
+
+
+## 🐋 Setup Via Docker (Both Fronted & Backend)
+
+> [!NOTE]
+> Make Sure to have Docker Installed on your Machine, if not, get it from [here](https://docs.docker.com/get-docker/)
+
+
+**1. Clone Repo**:  Clone the Snip Saavy Frontend Repo
+
+```
+    git clone https://github.com/SnipSavvy/SnipSavvy_Frontend.git
+```
+
+**2. Setup Enviroment Variables**:  Create a .env file and put all the required variables 
+> Make sure to put the .env file inside the SnipSaavy_Frontend folder, the same level as the Dockerfile
+
+```
+    AUTH_GOOGLE_ID=
+    AUTH_GOOGLE_SECRET=
+    NEXTAUTH_URL=http://localhost:3000/api/auth/
+    NEXTAUTH_SECRET=
+
+    MONGO_URL=mongodb://mongo:27017/snip_saavy
+    ENCRYPTION_KEY=
+    ALGORITHM=
+```
+
+**3. Run the containers**:  Runing Containers using docker-compose (comes with Docker Installation)
+```
+    docker-compose --env-file .env up
+```
+
+> After the containers builds, you can start using the Snip Savvy Web Application @ http://localhost:3000/
+
+
+<br />
+
 
 ## ⭐Pull Request Template
 
