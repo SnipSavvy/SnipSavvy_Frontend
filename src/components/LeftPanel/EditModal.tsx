@@ -90,7 +90,7 @@ const EditModal: React.FC<EditModalProps> = ({ open, onClose, workspace }) => {
             label="New Workspace Name..."
             variant="outlined" // Change variant to outlined for a cleaner look
             fullWidth // Take up full width
-            className="mb-2" // Add margin bottom
+            sx={{mb : 2}} // Add margin bottom
             onChange={(e) => setNewName(e.target.value)}
           />
           <TextField
@@ -98,7 +98,7 @@ const EditModal: React.FC<EditModalProps> = ({ open, onClose, workspace }) => {
             label="New Description..."
             variant="outlined" // Change variant to outlined for a cleaner look
             fullWidth // Take up full width
-            className="mb-2" // Add margin bottom
+            sx={{mb : 2}} // Add margin bottom
             onChange={(e) => setNewDescription(e.target.value)}
           />
           <Button
