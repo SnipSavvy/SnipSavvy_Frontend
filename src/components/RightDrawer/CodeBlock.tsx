@@ -278,24 +278,32 @@ function CodeBlock({ isEditable, setIsEditable, shared, setIsOpen }: props) {
 
             <div className="">
               {shared != "true" && snippet && (
-                <div className="relative mt-12">
+                <div className="relative mt-12 mr-2">
                   <button
                     onClick={toggleEditable}
-                    className="absolute -top-10 right-6 text-zinc-100 bg-zinc-900 hover:bg-zinc-700 border border-zinc-100 duration-300 rounded-sm p-2 mx-2"
+                    className="group absolute -top-10 right-6 text-zinc-100 bg-zinc-900 hover:bg-zinc-700 border border-zinc-100 duration-300 rounded-sm p-2 mx-2"
                   >
                     {isEditable ? <MdEdit /> : <TbPencilCancel />}
+                    
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-max p-2 text-xs text-zinc-100 bg-zinc-900 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-bold">EDIT</div>  
                   </button>
-                  <button
-                    className="absolute -top-10 right-0 text-zinc-100 font-bold bg-zinc-900 hover:bg-zinc-700 border border-zinc-100 duration-300 rounded-sm p-2"
+                  
+                  <button 
+                    className="group absolute -top-10 right-0 text-zinc-100 font-bold bg-zinc-900 hover:bg-zinc-700 border border-zinc-100 duration-300 rounded-sm p-2" 
                     onClick={() => copyToClipboard(codeData[0].code)}
                   >
                     <LuCopyPlus />
+                    
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-max p-2 text-xs text-zinc-100 bg-zinc-900 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">COPY</div>
                   </button>
+                                  
                   <button
-                    className="absolute -top-10 right-16 text-zinc-100 font-bold bg-zinc-900 hover:bg-zinc-700 border border-zinc-100 duration-300 rounded-sm p-2"
+                    className="group absolute -top-10 right-16 text-zinc-100 font-bold bg-zinc-900 hover:bg-zinc-700 border border-zinc-100 duration-300 rounded-sm p-2"
                     onClick={toggleBox}
                   >
                     <CiShare2 />
+
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-max p-2 text-xs text-zinc-100 bg-zinc-900 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">SHARE</div>
                   </button>
                 </div>
               )}

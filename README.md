@@ -53,6 +53,12 @@ Backend Repo: https://github.com/SnipSavvy/SnipSavvy_Backend
 
 ## ⭐Getting Started with Contributing
 
+Refer to this Contributing guide- 
+https://github.com/SnipSavvy/SnipSavvy_Frontend/blob/main/.github/Contribution%20Guide/CONTRIBUTING.md
+
+Refer to this for Issue Template- 
+https://github.com/SnipSavvy/SnipSavvy_Frontend/blob/main/.github/Issue%20Template/new_issue.md
+
 Thank you for considering contributing to our project. Your involvement is invaluable to us. To ensure a smooth and collaborative process, please follow these steps:
 
 **Fork the Repository**: Begin by forking the repository to your personal GitHub account. This will create a copy of the project under your account.
@@ -62,14 +68,55 @@ Thank you for considering contributing to our project. Your involvement is inval
 ``` bash
 git clone <fork-link>
 ```
+**Get the backend**: Fork and clone the backend part of the project from the links above
 
-**Install the needed dependencies before trying it out in the development environment**
+
+**Install the needed dependencies for both backend and frontend before trying it out in the development environment**:
 
 ``` sh
 npm install
 ```
 
-**Set Up the Development Environment**: Initialize the development environment by running the appropriate command:
+**Set up your .env file for the backend**: Initialize the .env variables
+
+``` sh
+MONGO_URL='Your MongoDB URI'
+ENCRYPTION_KEY=
+ALGORITHM=
+PORT='Your Desired Port value, ex: 4000'
+EMAIL_USERNAME= 'Your Email'
+EMAIL_PASSWORD= 'Your Password'
+``` 
+
+**Set up your .env file for the frontend**: Initialize the .env variables
+
+``` sh
+NEXT_PUBLIC_BASEURL=http://localhost:"Your backend PORT"
+AUTH_GOOGLE_ID="Your Google Client ID"
+AUTH_GOOGLE_SECRET="Your Google Client Secret"
+NEXTAUTH_URL=http://localhost:3000/api/auth/
+NEXTAUTH_SECRET="Your Secret Key"
+``` 
+**Note**: To get your Google client ID and Client Secret go to https://console.cloud.google.com/ , go to API and Services and generate your credentials
+
+
+There should be a "Authorized Redirect URIs" in the credentials sections, there copy paste this URI: http://localhost:3000/api/auth/callback/google
+
+
+**Set Up the Backend Development Environment**: Initialize the development environment by running the appropriate command:
+
+``` sh
+npm start
+# or
+yarn start
+# or
+pnpm start
+# or
+bun start
+``` 
+
+
+**Set Up the Frontend Development Environment**: Initialize the development environment by running the appropriate command:
 
 ``` sh
 npm run dev
@@ -80,6 +127,7 @@ pnpm dev
 # or
 bun dev
 ``` 
+
 
 **Implement Your Changes**: Once the development environment is set up, proceed to make your desired changes to the codebase.
 
