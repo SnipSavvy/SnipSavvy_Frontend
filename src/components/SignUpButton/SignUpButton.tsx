@@ -33,11 +33,10 @@ export function SignUpButton({ description }: ButtonProps) {
         }
       );
     };
-    if(localStorage.getItem("token")){
+    if (localStorage.getItem("token")) {
       router.push("/workspace");
-    }else if(session && session.status === "authenticated") {
+    } else if (session && session.status === "authenticated") {
       setIsLoading(true);
-
 
       CreateUser();
     }
@@ -52,7 +51,7 @@ export function SignUpButton({ description }: ButtonProps) {
       {isLoading && <LoadingSpinner />}
       <button
         onClick={(e) => handleSignInGoogle(e)}
-        className="px-3 py-2 bg-[#045AA6] text-white font-semibold rounded-xl"
+        className="px-3 py-2 bg-[#045AA6] text-white font-semibold rounded-xl hover:bg-[#016accb0]"
       >
         {description}
       </button>

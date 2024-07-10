@@ -8,12 +8,16 @@ import Footer from "@/components/LandingPage/Footer";
 import Working from "@/components/LandingPage/Bug";
 import Bug from "@/components/LandingPage/Bug";
 import GoToTop from "@/components/LandingPage/scrollToTop";
+
 export default function Component() {
   return (
-    <div className="flex flex-col min-h-[100dvh] text-gray-50">
+    <div
+      className="flex flex-col min-h-[100dvh] text-gray-50"
+      style={{ scrollBehavior: "smooth", userSelect: "none" }}
+    >
       <main className="flex-1">
         <Hero />
-       
+
         <section className="w-full py-12 md:py-24 lg:py-24 bg-[#151519] text-gray-50">
           <div className="container px-4 md:px-6">
             <div className=" items-center gap-6  lg:gap-10">
@@ -83,7 +87,7 @@ export default function Component() {
                     <div
                       tabIndex={0}
                       aria-label="card 1"
-                      className="focus:outline-none flex sm:w-full md:w-1/2 lg:border-r md:border-r sm:border-r-0 border-indigo-400 pb-10 lg:pt-10"
+                      className="focus:outline-none flex gap-8 sm:gap-4 px-3 sm:w-full md:w-1/2  lg:border-r md:border-r sm:border-r-0 border-indigo-400 pt-10 lg:pb-20"
                     >
                       {/* <div className=" flex flex-shrink-0 mr-5 text-white">
                         <ClockIcon className="h-8 w-8 text-[#045AA6]" />
@@ -115,7 +119,7 @@ export default function Component() {
                     <div
                       tabIndex={0}
                       aria-label="card 2"
-                      className="focus:outline-none pl-8 flex sm:w-full md:w-1/2 lg:pb-10 lg:pt-10"
+                      className="focus:outline-none flex gap-8 px-3 sm:gap-4 sm:w-full md:w-1/2  border-indigo-400 pt-10 lg:pb-20"
                     >
                       {/* <div className=" flex flex-shrink-0 sm:ml-0 md:ml-10 lg:ml-10 mr-5 text-white">
                         <FolderIcon className="h-8 w-8 text-[#045AA6]" />
@@ -145,7 +149,7 @@ export default function Component() {
                     <div
                       tabIndex={0}
                       aria-label="card 3"
-                      className="focus:outline-none flex sm:w-full md:w-1/2 lg:border-t md:border-t sm:border-t-0 lg:border-r md:border-r sm:border-r-0 border-indigo-400 pt-10 lg:pb-20"
+                      className="focus:outline-none flex gap-8 sm:gap-4 sm:w-full md:w-1/2 lg:border-t md:border-t sm:border-t-0 lg:border-r md:border-r px-3 sm:border-r-0 border-indigo-400 pt-10 lg:pb-20"
                     >
                       {/* <div className=" flex flex-shrink-0 mr-5 text-white">
                         <img
@@ -179,7 +183,7 @@ export default function Component() {
                     <div
                       tabIndex={0}
                       aria-label="card 4"
-                      className="focus:outline-none pl-8 flex sm:w-full md:w-1/2 lg:border-t md:border-t sm:border-t-0 border-indigo-400 pt-10 lg:pb-20"
+                      className="focus:outline-none flex gap-8 sm:gap-4 sm:w-full md:w-1/2 lg:border-t md:border-t sm:border-t-0 border-indigo-400 pt-10 lg:pb-20 px-3"
                     >
                       {/* <div className=" flex flex-shrink-0 sm:ml-0 md:ml-10 lg:ml-10 mr-5 text-white">
                         <UsersIcon className="h-8 w-8 text-[#045AA6]" />
@@ -222,7 +226,7 @@ export default function Component() {
         <UpcomingFeature />
         <Bug />
       </main>
-      <GoToTop/>
+      <GoToTop />
       <Footer />
     </div>
   );

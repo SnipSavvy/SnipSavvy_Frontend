@@ -17,7 +17,8 @@ const GoToTop: React.FC = () => {
 
   const listenToScroll = (): void => {
     const heightToHidden = 20;
-    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const winScroll =
+      document.body.scrollTop || document.documentElement.scrollTop;
 
     if (winScroll > heightToHidden) {
       setIsVisible(true);
@@ -41,8 +42,8 @@ const GoToTop: React.FC = () => {
     <>
       {isVisible && (
         <div
-          className={`fixed bottom-20 right-20 w-16 h-16 bg-[#045aa6] text-white flex items-center justify-center rounded-full shadow-lg cursor-pointer transition-opacity duration-70000 ${
-            isVisible ? 'opacity-100' : 'opacity-0'
+          className={`fixed bottom-20 right-20 w-16 h-16 bg-[#045aa6] text-white flex items-center justify-center rounded-full shadow-lg cursor-pointer transition-opacity duration-70000 hover:bg-[#016accb0] ${
+            isVisible ? "opacity-100" : "opacity-0"
           }`}
           onClick={goToBtn}
         >

@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { SiGooglegemini } from "react-icons/si";
 import { FaHistory } from "react-icons/fa";
@@ -30,7 +31,7 @@ const UpcomingFeature: React.FC = () => (
             />
           </div>
           <div className="mt-6 md:mt-10 grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-6 lg:mt-6 2xl:mt-12">
-            <div className="flex items-center">
+            <div className="flex items-center justify-center">
               <div className="w-16 h-16 relative">
                 <div className=" flex-shrink-0 z-20  w-16 h-16 flex items-center justify-center mt-2 mr-3">
                   <SiGooglegemini size={40} color="#F9C23C" />
@@ -45,7 +46,7 @@ const UpcomingFeature: React.FC = () => (
                 </p>
               </div>
             </div>
-            <div className="flex items-center ml-4">
+            <div className="flex items-center justify-center">
               <div className="w-16 h-16 relative">
                 <div className=" flex-shrink-0 z-20  w-16 h-16 flex items-center justify-center mt-2 mr-3">
                   <FaHistory size={40} color="#FF5B5B" />
@@ -60,7 +61,7 @@ const UpcomingFeature: React.FC = () => (
                 </p>
               </div>
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center justify-center">
               <div className="w-16 h-16 relative">
                 <div className=" flex-shrink-0 z-20  w-16 h-16 flex items-center justify-center mt-2 mr-3">
                   <TbUsersGroup size={40} color="#00AEFF" />
@@ -75,7 +76,7 @@ const UpcomingFeature: React.FC = () => (
                 </p>
               </div>
             </div>
-            <div className="flex items-center ml-4">
+            <div className="flex items-center justify-center">
               <div className="w-16 h-16 relative">
                 <div className=" flex-shrink-0 z-20  w-16 h-16 flex items-center justify-center mt-2 mr-3">
                   <IoExtensionPuzzle size={40} color="#AB2BB4" />
