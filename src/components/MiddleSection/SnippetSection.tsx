@@ -7,6 +7,7 @@ import axios from "axios";
 import Welcome from "./Welcome";
 import useFetch from "@/network/useFetch";
 import { baseURL } from "@/config";
+import { Skeleton } from "@mui/material";
 interface SnippetSectionProps {
   isRefresh: any;
 }
@@ -19,7 +20,7 @@ const SnippetSection: React.FC<SnippetSectionProps> = ({ isRefresh }) => {
 
   const collection = searchParams.get("collection") || "";
   const snippet = searchParams.get("snippet") || "";
-
+  const [isSnippetDataLoading, setIsSnippetDataLoading] = useState(false);
   const updateUrl = (name: string) => {
     const workspace = searchParams.get("workspace") || "";
     const collection = searchParams.get("collection") || "";
@@ -35,6 +36,7 @@ const SnippetSection: React.FC<SnippetSectionProps> = ({ isRefresh }) => {
   };
 
   const [isSnippet, setIsSnippet] = useState<any>([]);
+  
   useLayoutEffect(() => {
     const fetchSnippets = async () => {
       const token = localStorage.getItem("token");
@@ -42,10 +44,12 @@ const SnippetSection: React.FC<SnippetSectionProps> = ({ isRefresh }) => {
         Authorization: `Bearer ${token}`,
       };
       try {
+        setIsSnippetDataLoading(true);
         const response = await axios.get(
           `${baseURL}/v1/api/snippet?cat_id=${collection}`,
           { headers }
         );
+        setIsSnippetDataLoading(false);
         setIsSnippet(response.data);
         console.log(response.data.data);
       } catch (error) {
@@ -56,24 +60,40 @@ const SnippetSection: React.FC<SnippetSectionProps> = ({ isRefresh }) => {
       fetchSnippets();
     }
   }, [collection, isRefresh]);
-
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <div>
         {collection ? (
           <div
             style={{ height: "100vh" }}
-            className="h-screen-full w-full overflow-y-auto"
+            className="h-screen-full w-full  overflow-y-auto"
           >
-            <div className={`${snippet ? "w-1/3 " : "vw-75"} flex flex-col `}>
+            <div className={`${snippet ? "w-1/3 " : "vw-75 "} flex flex-col `}>
               <div className="w-full flex mt-2">
                 <div className="w-full flex flex-wrap">
-                  <div className="flex flex-wrap justify-start pb-20">
+                  <div className="flex flex-wrap justify-start items-center pb-20 ">
+                  {isSnippetDataLoading ? (
+                    <div className={`${snippet ? "vw-25 " : "vw-75 "}flex flex-wrap justify-around   ml-8 mt-10 `}>
+                      <div style={{borderRadius: "2rem"}} className="w-96 mr-4 mb-6 bg-zinc-800 h-56  text-zinc-800 text-7xl overflow-hidden">the skeleton reactangular</div>
+                      <div style={{borderRadius: "2rem"}} className="w-96 mr-4 mb-6 bg-zinc-800 h-56  text-zinc-800 text-7xl overflow-hidden">the skeleton reactangular</div>
+                      <div style={{borderRadius: "2rem"}} className="w-96 mr-4 mb-6 bg-zinc-800 h-56  text-zinc-800 text-7xl overflow-hidden">the skeleton reactangular</div>
+                      <div style={{borderRadius: "2rem"}} className="w-96 mr-4 mb-6 bg-zinc-800 h-56  text-zinc-800 text-7xl overflow-hidden">the skeleton reactangular</div>
+                      <div style={{borderRadius: "2rem"}} className="w-96 mr-4 mb-6 bg-zinc-800 h-56  text-zinc-800 text-7xl overflow-hidden">the skeleton reactangular</div>
+                      
+                      
+                      
+                    
+                   
+                    
+                  </div>
+                  ):( <div className="flex flex-wrap justify-start">
                     {isSnippet?.map((snip: any) => (
                       <button key={snip._id}>
                         <SnippetCard {...snip} />
                       </button>
                     ))}
+                  </div> )}
+                    
                   </div>
                 </div>
               </div>
